@@ -1,5 +1,7 @@
 import React from "react";
 
+import PlayButton from "../play-button/play-button.component";
+
 import './recents-item.styles.scss'
 
 const RecentsItem = ({ imgUrl, name }) => (
@@ -9,8 +11,8 @@ const RecentsItem = ({ imgUrl, name }) => (
       className='badge'
       alt='album art'
     />
-    <h3 className='track-name'>{name}</h3>
-    <button>P</button>
+    <h3 className='track-name'>{name.length < 20 ? name :`${name.substring(0,30)}...`}</h3>
+    <PlayButton />
   </div>
 )
 

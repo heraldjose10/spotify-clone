@@ -1,0 +1,21 @@
+.play-button{
+  height: 45px;
+  width: 45px;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+
+  &:hover{
+    transform: scale(1.3);
+    transition: transform .1s ease-in;
+  }
+
+  .play-svg{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+  }
+}

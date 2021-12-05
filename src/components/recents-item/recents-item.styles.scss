@@ -1,5 +1,11 @@
-$primary-color: rgb(66, 92, 42);
-$primary-text-color: rgb(210, 226, 200);
+// $primary-color: rgb(66, 92, 42);
+// $primary-text-color: rgb(210, 226, 200);
+$primary-color: rgb(119, 199, 44);
+$primary-text-color: rgb(79, 92, 71);
+
+@mixin showButton {
+  opacity: 100;
+}
 
 .recents-item {
   display: flex;
@@ -9,9 +15,13 @@ $primary-text-color: rgb(210, 226, 200);
   height: 120px;
   min-width: 350px;
   flex: 1;
-  padding-right: 10px;
+  padding-right: 20px;
   cursor: pointer;
   border-radius: 20px;
+
+  &:hover .play-button {
+    @include showButton()
+  }
 
   .badge {
     height: 120px;
@@ -19,7 +29,7 @@ $primary-text-color: rgb(210, 226, 200);
     border-radius: 20px 0 0 20px;
   }
 
-  .track-name{
+  .track-name {
     justify-self: flex-start;
     flex: auto;
     margin: 0 10px;
