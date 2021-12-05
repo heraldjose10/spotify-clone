@@ -6,3 +6,8 @@
 h1 {
   font-family: 'TT Commons';
 }
+
+.app {
+  display: flex;
+  background-color: rgb(26, 31, 27);
+}

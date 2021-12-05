@@ -6,7 +6,7 @@ import RecentsCollection from "../../components/recents-collection/recents-colle
 import './homepage.styles.scss'
 
 const HomePage = () => (
-  <div>
+  <div className='homepage'>
     <GreetingCard />
     <RecentsCollection />
   </div>

@@ -1,0 +1,18 @@
+.nav-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+
+  img{
+    height: 35px;
+    width: 35px;
+    margin-right: 25px;
+  }
+
+  h3{
+    margin: 0;
+  }
+}
