@@ -3,10 +3,9 @@ $large-screen: 1920px;
 .recents-collection {
   display: flex;
   flex-wrap: wrap;
-  height: 240px;
+  height: 270px;
   overflow: hidden;
   gap: 30px;
-  padding: 30px;
 
   @media screen and(min-width:$large-screen) {
     max-width: 1890px;

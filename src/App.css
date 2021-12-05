@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'TT Commons';
+  src: url('./fonts/TT\ Commons\ Bold.otf');
+}
+
+h1 {
+  font-family: 'TT Commons';
+}
