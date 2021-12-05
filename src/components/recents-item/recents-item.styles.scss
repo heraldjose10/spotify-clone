@@ -1,0 +1,28 @@
+$primary-color: rgb(66, 92, 42);
+$primary-text-color: rgb(210, 226, 200);
+
+.recents-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $primary-color;
+  height: 120px;
+  min-width: 350px;
+  flex: 1;
+  padding-right: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+
+  .badge {
+    height: 120px;
+    width: 120px;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .track-name{
+    justify-self: flex-start;
+    flex: auto;
+    margin: 0 10px;
+    color: $primary-text-color;
+  }
+}
