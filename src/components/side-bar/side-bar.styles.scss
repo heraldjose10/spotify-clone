@@ -10,10 +10,12 @@
   align-items: center;
   flex-direction: column;
   color: white;
+  position: sticky;
+  top: 0;
 
-  hr{
+  hr {
     width: 90%;
-    height: .5px;
+    height: 0.5px;
     margin: 0;
   }
 }

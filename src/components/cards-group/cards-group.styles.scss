@@ -1,0 +1,19 @@
+.group {
+  margin: 30px 0 20px 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  .group-heading{
+    font-size: 40px;
+  }
+
+  .cards-container {
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    max-height: 360px;
+  }
+}

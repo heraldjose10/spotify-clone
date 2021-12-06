@@ -26,6 +26,9 @@ class GreetingCard extends React.Component {
     else if (hour >= 4) {
       this.setState({ greeting: 'Good morning' })
     }
+    else{
+      this.setState({ greeting: 'Hello there!' })
+    }
   }
 
   render() {

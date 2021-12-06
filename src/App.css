@@ -3,7 +3,7 @@
   src: url('./fonts/TT\ Commons\ Bold.otf');
 }
 
-h1 {
+h1,h2 {
   font-family: 'TT Commons';
 }
 
