@@ -1,5 +1,6 @@
 // $primary-color: rgb(66, 92, 42);
 // $primary-text-color: rgb(210, 226, 200);
+$badge-heigt: 90px;
 $primary-color: rgb(44, 54, 50);
 $primary-text-color: white;
 
@@ -12,7 +13,7 @@ $primary-text-color: white;
   align-items: center;
   justify-content: space-between;
   background-color: $primary-color;
-  height: 120px;
+  height: $badge-heigt;
   min-width: 350px;
   flex: 1;
   padding-right: 20px;
@@ -24,8 +25,8 @@ $primary-text-color: white;
   }
 
   .badge {
-    height: 120px;
-    width: 120px;
+    height: $badge-heigt;
+    width: $badge-heigt;
     border-radius: 20px 0 0 20px;
   }
 

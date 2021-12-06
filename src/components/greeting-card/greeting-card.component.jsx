@@ -17,13 +17,13 @@ class GreetingCard extends React.Component {
     if (hour >= 12 && hour < 16) {
       this.setState({ greeting: 'Good afternoon' })
     }
-    else if (hour => 16 && hour < 19) {
+    else if (hour >= 16 && hour < 19) {
       this.setState({ greeting: 'Good evening' })
     }
-    else if (hour => 19 && hour < 4) {
+    else if (hour >= 19) {
       this.setState({ greeting: 'Good night' })
     }
-    else {
+    else if (hour >= 4) {
       this.setState({ greeting: 'Good morning' })
     }
   }
