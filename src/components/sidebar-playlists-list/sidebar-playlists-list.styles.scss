@@ -1,0 +1,19 @@
+.list{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  padding-left: 50px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  h3{
+    font-size: 14px;
+    margin: 20px 0;
+    color: rgb(207, 190, 190);
+
+    &:hover{
+      color: white;
+    }
+  }
+
+}

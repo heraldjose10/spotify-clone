@@ -10,9 +10,9 @@ class SideBarNav extends React.Component {
     super();
     this.state = {
       buttons: [
-        { name: 'Search', iconUrl: '/icons/search.svg', to:'search' },
-        { name: 'Home', iconUrl: '/icons/house-door.svg', to:'/' },
-        { name: 'Your Library', iconUrl: '/icons/music-note-list.svg', to:'library' }
+        { name: 'Search', iconUrl: 'bi bi-search', to:'search' },
+        { name: 'Home', iconUrl: 'bi bi-house-door', to:'/' },
+        { name: 'Your Library', iconUrl: 'bi bi-music-note-list', to:'library' }
       ]
     }
   }

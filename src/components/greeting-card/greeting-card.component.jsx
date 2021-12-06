@@ -12,7 +12,7 @@ class GreetingCard extends React.Component {
   }
 
   componentDidMount() {
-    let now = new Date;
+    let now = new Date();
     let hour = now.getHours()
     if (hour >= 12 && hour < 16) {
       this.setState({ greeting: 'Good afternoon' })

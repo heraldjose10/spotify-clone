@@ -4,15 +4,19 @@
   margin: 10px 0;
   cursor: pointer;
   text-decoration: none;
-  color: white;
+  color: rgb(207, 190, 190);
 
-  img{
-    height: 35px;
-    width: 35px;
+  &:hover {
+    color: white;
+  }
+
+  i {
+    font-size: 1.5em;
     margin-right: 25px;
   }
 
-  h3{
+  h3 {
     margin: 0;
+    font-size: 14px;
   }
 }
