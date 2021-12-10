@@ -10,9 +10,9 @@ class SideBarNav extends React.Component {
     super();
     this.state = {
       buttons: [
-        { name: 'Search', iconUrl: 'bi bi-search', to:'search' },
-        { name: 'Home', iconUrl: 'bi bi-house-door', to:'/' },
-        { name: 'Your Library', iconUrl: 'bi bi-music-note-list', to:'library' }
+        { id:1, name: 'Search', iconUrl: 'bi bi-search', to: 'search' },
+        { id:2, name: 'Home', iconUrl: 'bi bi-house-door', to: '/' },
+        { id:3, name: 'Your Library', iconUrl: 'bi bi-music-note-list', to: 'library' }
       ]
     }
   }
@@ -22,7 +22,7 @@ class SideBarNav extends React.Component {
       <div className='side-bar-nav'>
         {
           this.state.buttons.map((button) =>
-            <NavItem {...button} />
+            <NavItem key={button.id} {...button} />
           )
         }
       </div>

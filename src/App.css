@@ -1,13 +1,18 @@
 @font-face {
-  font-family: 'TT Commons';
-  src: url('./fonts/TT\ Commons\ Bold.otf');
+    font-family: 'TT Commons';
+    src: url('./fonts/TT\ Commons\ Bold.otf');
 }
 
-h1,h2 {
-  font-family: 'TT Commons';
+h1,
+h2 {
+    font-family: 'TT Commons';
+}
+
+p {
+    font-family: 'Proxima Nova';
 }
 
 .app {
-  display: flex;
-  background-color: rgb(26, 31, 27);
+    display: flex;
+    background-color: rgb(26, 31, 27);
 }

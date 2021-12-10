@@ -35,7 +35,12 @@ class CardsGroup extends React.Component {
             this.state.albums
               .filter((value, index) => index <= 4)
               .map(album =>
-                <Card name={album.name} imageUrl={album.images[1].url} artists={album.artists} />
+                <Card
+                  name={album.name}
+                  imageUrl={album.images[1].url}
+                  artists={album.artists}
+                  key={album.id}
+                />
               )
           }
         </div>

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('./fonts/ProximaNova-Regular.otf');
+}
+
 body {
   /* padding-right: 30px; */
   margin: 0;
@@ -6,6 +11,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p{
+  font-family: 'Proxima Nova';
 }
 
 code {
