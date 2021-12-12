@@ -10,7 +10,7 @@ class SideBarBtnsGroup extends React.Component {
     this.state = {
       buttons: [
         { id: 1, name: 'Create Playlist', iconUrl: 'bi bi-plus-square-fill', to: 'add-playlist' },
-        { id: 2, name: 'Liked Songs', iconUrl: 'bi bi-plus-square-fill', to: 'liked-songs' }
+        { id: 2, name: 'Liked Songs', iconUrl: 'bi bi-plus-square-fill', to: '/playlist/liked' }
       ]
     }
   }

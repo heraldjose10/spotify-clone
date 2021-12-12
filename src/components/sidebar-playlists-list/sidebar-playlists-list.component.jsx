@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import token from "../../env/token";
 
@@ -28,9 +29,11 @@ class SideBarPlaylistsList extends React.Component {
       <div className='list'>
         {
           this.state.playlists.map((playlist) =>
-            <h3 key={playlist.id}>
-              {playlist.name.length>30? `${playlist.name.substring(0,30)}...`: playlist.name}
-            </h3>
+            <Link key={playlist.id} to={`/playlist/${playlist.id}`}>
+              <h3>
+                {playlist.name.length > 30 ? `${playlist.name.substring(0, 30)}...` : playlist.name}
+              </h3>
+            </Link>
           )
         }
       </div>

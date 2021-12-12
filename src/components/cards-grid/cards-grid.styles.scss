@@ -1,6 +1,11 @@
-.cards-grid{
+.cards-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   color: white;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }

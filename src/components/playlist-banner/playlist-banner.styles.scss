@@ -1,0 +1,40 @@
+.banner {
+  display: flex;
+  background: linear-gradient(90deg, rgb(32, 26, 141) 0%, rgba(9, 9, 121, 1) 35%, rgb(130, 169, 219) 100%);
+  color: white;
+  height: 350px;
+  align-items: flex-end;
+  padding: 20px 40px;
+
+  .playlist-image {
+    height: 250px;
+    width: 250px;
+    background: linear-gradient(90deg, rgb(82, 82, 168) 35%, rgb(130, 169, 219) 100%);
+    box-shadow: 0px 0px 20px 4px rgb(43, 48, 70);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 64px;
+    }
+  }
+
+  .playlist-info {
+    padding: 0 20px;
+
+    h1 {
+      margin: 0;
+      font-size: 92px;
+    }
+
+    .description{
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+}

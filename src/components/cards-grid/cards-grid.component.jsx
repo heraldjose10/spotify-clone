@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 import token from "../../env/token";
 import Card from "../card/card.component";
@@ -13,7 +14,6 @@ class CardsGrid extends React.Component {
     this.headers = { Authorization: `Bearer ${token}` }
     this.state = {
       playlists: []
-      // add total likd ongs and latest liked songs list and render in liked songs carrd?!!
     }
   }
 
@@ -29,14 +29,17 @@ class CardsGrid extends React.Component {
   render() {
     return (
       <div className='cards-grid'>
-        <LikedSongsCard />
+        <Link to='/playlist/liked'>
+          <LikedSongsCard />
+        </Link>
         {this.state.playlists.map((playlist) =>
-          <Card
-            key={playlist.id}
-            imageUrl={playlist.images[0].url}
-            name={playlist.name}
-            owner={playlist.owner.display_name}
-          />
+          <Link key={playlist.id} to={`/playlist/${playlist.id}`}>
+            <Card
+              imageUrl={playlist.images[0].url}
+              name={playlist.name}
+              owner={playlist.owner.display_name}
+            />
+          </Link>
         )}
       </div>
     )
