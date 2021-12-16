@@ -1,0 +1,25 @@
+.tracks-list {
+  padding: 0 40px;
+  margin: 30px 0;
+  color: white;
+
+  .list-header {
+    display: flex;
+    margin-bottom: 30px;
+
+    .name,
+    .album {
+      flex: 1;
+    }
+    .duration {
+      flex: 0.2;
+    }
+    .date {
+      flex: 0.4;
+    }
+    .heading {
+      padding: 0 10px;
+      text-transform: uppercase;
+    }
+  }
+}
