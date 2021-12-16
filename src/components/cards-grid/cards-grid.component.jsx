@@ -29,7 +29,7 @@ class CardsGrid extends React.Component {
   render() {
     return (
       <div className='cards-grid'>
-        <Link to='/playlist/liked'>
+        <Link to='/playlist/liked' className="liked">
           <LikedSongsCard />
         </Link>
         {this.state.playlists.map((playlist) =>

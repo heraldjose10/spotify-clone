@@ -1,10 +1,11 @@
 .liked-songs-card {
-  width: 520px;
-  max-width: 590px;
+  // width: 520px;
+  // max-width: 590px;
+  grid-column: span 2/auto;
   background-color: blue;
   flex: 1 1 auto;
   padding: 20px 20px;
-  height: 320px;
+  height: 360px;
   border-radius: 10px;
   background: rgb(63, 94, 251);
   background: linear-gradient(43deg, rgba(63, 94, 251, 1) 48%, rgba(70, 242, 252, 1) 69%);
@@ -27,7 +28,7 @@
 
   .button-container {
     position: absolute;
-    top: 360px-70px;
+    top: 400px-70px;
     right: 30px;
   }
 

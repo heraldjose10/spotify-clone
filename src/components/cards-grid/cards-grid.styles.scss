@@ -1,6 +1,11 @@
 .cards-grid {
-  display: flex;
-  flex-wrap: wrap;
+  .liked {
+    grid-column: span 2 / auto;
+  }
+  // width: 1000px;
+  display: grid;
+  // flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 300px));
   gap: 30px;
   color: white;
 
