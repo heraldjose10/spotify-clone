@@ -1,9 +1,12 @@
 import { Route, Routes } from 'react-router';
+
 import './App.css';
+
 import SideBar from './components/side-bar/side-bar.component';
 import HomePage from './pages/homepage/homepage.component';
 import Library from './pages/library/library.component';
-import Playlist from './pages/playlist/playlist.component';
+import PlaylistPage from './pages/playlist-page/playlist-page.component';
+import Playlist from './components/playlist/playlist.component';
 
 function App() {
   return (
@@ -12,7 +15,10 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/library' element={<Library />} />
-        <Route path='/playlist/:playlistId' element={<Playlist />} />
+        <Route path='/playlist' element={<PlaylistPage />}>
+          <Route path='liked' element={<Playlist likedSongs={true} />} />
+          <Route path=':playlistId' element={<Playlist />} />
+        </Route>
       </Routes>
     </div>
   )
