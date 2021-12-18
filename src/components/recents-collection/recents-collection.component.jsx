@@ -1,54 +1,55 @@
 import React from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
 import RecentsItem from "../recents-item/recents-item.components";
 
-import token from '../../env/token'
+import { setRecentTracks } from "../../redux/player/player.actions";
+import { API_ENDPOINT } from "../../endpoints";
 
 import './recents-collection.styles.scss'
 
-class RecentsCollection extends React.Component {
 
-  constructor() {
-    super();
-    this.headers = { Authorization: `Bearer ${token}` }
-    this.state = {
-      recents: [],
-      error: false
-    }
-  }
+const RecentsCollection = ({ currentUser, setRecentTracks, recentTracks }) => {
 
-  componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'https://api.spotify.com/v1/me/player/recently-played',
-      headers: this.headers,
+  const getRecentSongs = async () => {
+    let response = await axios.get(`${API_ENDPOINT}me/player/recently-played`, {
+      headers: { Authorization: `Bearer ${currentUser.token}` },
       params: { limit: 8 }
     })
-      .then((response) => this.setState({ recents: response.data.items }))
-      .catch((error) => {
-        this.setState({ error: true })
-        console.log(error.response.data)
-      })
+    setRecentTracks(response.data.items)
   }
 
-  render() {
-    return (
-      <div className='recents-collection'>
-        {
-          this.state.error ?
-            <h1>error</h1>
-            : this.state.recents.map(item => (
-              <RecentsItem
-                key={this.state.recents.indexOf(item)}
-                imgUrl = {item.track.album.images[1].url}
-                name = {item.track.name}
-              />
-            ))
-        }
-      </div>
-    )
-  }
+  useEffect(() => {
+    if (recentTracks.length === 0) {
+      // update tracks if recent tracks array is empty
+      getRecentSongs()
+    }
+  })
+
+  return (
+    <div className='recents-collection'>
+      {
+        recentTracks.map(item => (
+          <RecentsItem
+            key={recentTracks.indexOf(item)}
+            imgUrl={item.track.album.images[1].url}
+            name={item.track.name}
+          />
+        ))
+      }
+    </div>
+  )
 }
 
-export default RecentsCollection;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+  recentTracks: state.player.recentTracks
+})
+
+const mapDispatchToProps = dispatch => ({
+  setRecentTracks: (tracks) => dispatch(setRecentTracks(tracks))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecentsCollection)

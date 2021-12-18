@@ -22,6 +22,7 @@ class SideBarPlaylistsList extends React.Component {
       headers: this.headers
     })
       .then(response => this.setState({ playlists: response.data.items }))
+      .catch(error => console.log(error))
   }
 
   render() {

@@ -24,6 +24,7 @@ class CardsGroup extends React.Component {
       headers: this.headers
     })
       .then(response => this.setState({ albums: response.data.albums.items }))
+      .catch(error => console.log(error))
   }
 
   render() {
