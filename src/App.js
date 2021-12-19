@@ -23,7 +23,7 @@ function App({ currentUser }) {
         <Route path='/dash' element={<HomePage />} />
         <Route path='/library' element={<Library />} />
         <Route path='/playlist' element={<PlaylistPage />}>
-          <Route path='liked' element={<Playlist likedSongs={true} />} />
+          <Route path='liked' element={<Playlist liked={true} />} />
           <Route path=':playlistId' element={<Playlist />} />
         </Route>
       </Routes>
