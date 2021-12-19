@@ -13,7 +13,9 @@ import LoginPrompt from './pages/login-prompt/login-prompt.component';
 function App({ currentUser }) {
   return (
     <div className='app'>
-      <SideBar />
+      {
+        currentUser ? <SideBar /> : ''
+      }
       <Routes>
         <Route path='/' element={
           currentUser ? <HomePage /> : <LoginPrompt />

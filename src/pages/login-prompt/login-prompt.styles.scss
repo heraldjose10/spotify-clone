@@ -1,7 +1,97 @@
-.login{
-  height: 41px;
-  width: 300px;
-  background-color: white;
-  border: black solid;
-  cursor: pointer;
+.login-prompt {
+  width: 100%;
+  height: 100vh;
+  background-color: #dfecd4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 100px;
+
+  .text {
+    p {
+      margin: 0;
+    }
+
+    .line-one {
+      font-size: 280px;
+
+      span:first-child {
+        letter-spacing: -0.05em;
+        font-weight: bolder;
+        margin-right: 60px;
+        padding-right: 20px;
+        cursor: pointer;
+        background-color: #189c46;
+        color: white;
+        position: relative;
+
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+
+      span:last-child {
+        font-style: italic;
+        letter-spacing: -0.05em;
+      }
+    }
+
+    .line-two {
+      font-size: 300px;
+      font-weight: bold;
+      color: #189c46;
+      letter-spacing: -0.05em;
+    }
+
+    @media (max-width: 1440px) {
+      .line-one {
+        font-size: 14rem;
+      }
+
+      .line-two {
+        font-size: 16rem;
+      }
+    }
+
+    @media (max-width: 1136px) {
+      .line-one {
+        font-size: 8rem;
+      }
+
+      .line-two {
+        font-size: 10rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .login-prompt {
+    padding-left: 4em;
+
+    .line-one {
+      span:first-child {
+        display: block;
+        width: fit-content;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 554px) {
+  .login-prompt {
+    padding-left: 2em;
+
+    .text {
+      .line-one {
+        font-size: 22vw;
+      }
+
+      .line-two {
+        font-size: 26vw;
+      }
+    }
+  }
 }

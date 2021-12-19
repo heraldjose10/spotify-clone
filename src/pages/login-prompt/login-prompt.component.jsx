@@ -5,13 +5,13 @@ import './login-prompt.styles.scss'
 const LoginPrompt = () => {
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <div
-        className='login'
-        onClick={handleLogin}
-      >
-        Click Here
+    <div className='login-prompt'>
+      <div className='text'>
+        <p className='line-one'>
+          <span onClick={handleLogin}>Login</span>
+          <span>with</span>
+        </p>
+        <p className='line-two'>Spotify</p>
       </div>
     </div>
   )
