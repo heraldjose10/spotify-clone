@@ -1,4 +1,4 @@
-import { recentsActionTypes } from "./player.types"
+import { playerActionTypes } from "./player.types"
 
 const INITIAL_STATE = {
   recentTracks: []
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 
 const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case recentsActionTypes.SET_RECENT_TRACKS:
+    case playerActionTypes.SET_RECENT_TRACKS:
       return {
         ...state,
         recentTracks: action.payload

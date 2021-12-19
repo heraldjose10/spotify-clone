@@ -1,6 +1,6 @@
-import {recentsActionTypes} from './player.types'
+import {playerActionTypes} from './player.types'
 
 export const setRecentTracks = (tracks) => ({
-  type: recentsActionTypes.SET_RECENT_TRACKS,
+  type: playerActionTypes.SET_RECENT_TRACKS,
   payload: tracks
 })

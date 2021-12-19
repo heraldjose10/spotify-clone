@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import axios from "axios";
 
 import { getAccessTokenFromURL } from '../../authorization/authorization.utils'
 import { setCurrentUser } from '../../redux/user/user.actions'
+import { API_ENDPOINT } from '../../endpoints'
 
 import GreetingCard from "../../components/greeting-card/greeting-card.component";
 import RecentsCollection from "../../components/recents-collection/recents-collection.component";
@@ -14,11 +16,26 @@ import './homepage.styles.scss'
 const HomePage = ({ currentUser, setCurrentUser }) => {
 
   useEffect(() => {
+
+    const getUserProfile = async (token) => {
+      let response = await axios(`${API_ENDPOINT}me`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      let userProfile = {
+        display_name: response.data.display_name,
+        id: response.data.id
+      }
+      setCurrentUser({
+        token: token,
+        ...userProfile
+      })
+    }
+
     if (window.location.hash && !currentUser) {
       const token = getAccessTokenFromURL(window.location.hash)
-      setCurrentUser({ token: token })
+      getUserProfile(token)
     }
-  })
+  }, [currentUser, setCurrentUser])
 
   if (currentUser) {
     return (
