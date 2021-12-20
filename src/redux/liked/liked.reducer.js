@@ -3,7 +3,7 @@ import { likedActionTypes } from "./liked.types"
 const INITIAL_STATE = {
   songs: {
     tracks: [],
-    detials: {}
+    details: {}
   }
 }
 
