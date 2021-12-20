@@ -1,39 +1,35 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+
+import { setNewReleases } from "../../redux/recommendation/recommendation.actions";
+import { API_ENDPOINT } from "../../endpoints";
 
 import Card from "../card/card.component";
 
-import token from "../../env/token";
-
 import './cards-group.styles.scss'
 
-class CardsGroup extends React.Component {
 
-  constructor() {
-    super()
-    this.headers = { Authorization: `Bearer ${token}` }
-    this.state = {
-      albums: []
+const CardsGroup = ({ newReleases, token, setNewReleases }) => {
+
+  useEffect(() => {
+    const fetchNewReleases = async (userToken) => {
+      const response = await axios(`${API_ENDPOINT}browse/new-releases`, {
+        headers: { Authorization: `Bearer ${userToken}` }
+      })
+      console.log(response);
+      setNewReleases(response.data.albums.items)
     }
-  }
+    fetchNewReleases(token)
+  }, [setNewReleases, token])
 
-  componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'https://api.spotify.com/v1/browse/new-releases',
-      headers: this.headers
-    })
-      .then(response => this.setState({ albums: response.data.albums.items }))
-      .catch(error => console.log(error))
-  }
-
-  render() {
-    return (
-      <div className='group'>
-        <h2 className='group-heading'>Hot new releases</h2>
-        <div className='cards-container'>
-          {
-            this.state.albums
+  return (
+    <div className='group'>
+      <h2 className='group-heading'>Hot new releases</h2>
+      <div className='cards-container'>
+        {
+          newReleases
+            ? newReleases
               .filter((value, index) => index <= 4)
               .map(album =>
                 <Card
@@ -43,11 +39,20 @@ class CardsGroup extends React.Component {
                   key={album.id}
                 />
               )
-          }
-        </div>
+            : ''
+        }
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default CardsGroup;
+const mapStateToProps = state => ({
+  newReleases: state.recommendation.newReleases,
+  token: state.user.currentUser.token
+})
+
+const mapDispatchToProps = dispatch => ({
+  setNewReleases: newReleases => dispatch(setNewReleases(newReleases))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsGroup);
