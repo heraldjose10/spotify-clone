@@ -9,8 +9,9 @@ import Library from './pages/library/library.component';
 import PlaylistPage from './pages/playlist-page/playlist-page.component';
 import Playlist from './components/playlist/playlist.component';
 import LoginPrompt from './pages/login-prompt/login-prompt.component';
+import MusicPlayer from './components/music-player/music-player.component';
 
-function App({ currentUser }) {
+function App({ currentUser,nowPlaying }) {
   return (
     <div className='app'>
       {
@@ -27,12 +28,16 @@ function App({ currentUser }) {
           <Route path=':playlistId' element={<Playlist />} />
         </Route>
       </Routes>
+      {
+        currentUser&& nowPlaying? <MusicPlayer nowPlaying = {nowPlaying}/> : ''
+      }
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
+  nowPlaying: state.player.nowPlaying
 })
 
 export default connect(mapStateToProps)(App);

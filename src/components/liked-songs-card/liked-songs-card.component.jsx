@@ -34,7 +34,6 @@ const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displ
             })
           })
           .catch(error => console.log(error))
-        console.log('working');
       }
       getLikedSongs()
     }

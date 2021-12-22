@@ -8,7 +8,13 @@ export const handleLogin = () => {
   const SCOPES = [
     'user-read-recently-played',
     'playlist-read-private',
-    'user-library-read'
+    'user-library-read',
+    'streaming',
+    'user-read-email',
+    'user-read-private',
+    'user-read-playback-state',
+    'user-modify-playback-state',
+    'user-library-modify'
   ]
 
   const REDIRECT = `${URL}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&scope=${SCOPES.join('+')}&redirect_uri=${REDIRECT_URI}`
