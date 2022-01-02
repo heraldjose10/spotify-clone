@@ -3,7 +3,9 @@ import searchActionTypes from "./search.types"
 const INITIAL_STATE = {
   searchTerm: '',
   returnedArtists: [],
-  returnedTrackes: []
+  returnedTrackes: [],
+  returnedAlbums: [],
+  returnedPlaylists: []
 }
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +26,18 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         returnedArtists: action.payload
+      }
+    }
+    case searchActionTypes.SET_RETURNED_ALBUMS: {
+      return {
+        ...state,
+        returnedAlbums: action.payload
+      }
+    }
+    case searchActionTypes.SET_RETURNED_PLAYLISTS: {
+      return {
+        ...state,
+        returnedPlaylists: action.payload
       }
     }
     default: {

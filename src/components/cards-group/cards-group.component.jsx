@@ -19,7 +19,7 @@ const CardsGroup = ({ displayItems, groupHeader }) => {
                 <Card
                   name={item.name}
                   imageUrl={
-                    item.images.length > 0 ? item.images[1].url : ''
+                    item.images.length > 0 ? item.images[0].url : ''
                   }
                   artists={item.artists}
                   key={item.id}

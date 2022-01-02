@@ -14,3 +14,13 @@ export const setReturnedArtists = (artists) => ({
   type: searchActionTypes.SET_RETURNED_ARTISTS,
   payload: artists
 })
+
+export const setReturnedAlbums = (albums) => ({
+  type: searchActionTypes.SET_RETURNED_ALBUMS,
+  payload: albums
+})
+
+export const setReturnedPlaylists = playlists => ({
+  type: searchActionTypes.SET_RETURNED_PLAYLISTS,
+  payload: playlists
+})
