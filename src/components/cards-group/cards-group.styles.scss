@@ -5,16 +5,17 @@
   flex-direction: column;
   max-width: 1890px;
 
-  .group-heading{
+  .group-heading {
     font-size: 40px;
   }
 
   .cards-container {
-    display: flex;
+    display: grid;
     overflow: hidden;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     gap: 30px;
-    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    // justify-content: space-between;
     max-height: 400px;
   }
 }

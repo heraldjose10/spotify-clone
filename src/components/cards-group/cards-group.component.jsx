@@ -1,42 +1,28 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-
-import { setNewReleases } from "../../redux/recommendation/recommendation.actions";
-import { API_ENDPOINT } from "../../endpoints";
+import React from "react";
 
 import Card from "../card/card.component";
 
 import './cards-group.styles.scss'
 
 
-const CardsGroup = ({ newReleases, token, setNewReleases }) => {
-
-  useEffect(() => {
-    const fetchNewReleases = async (userToken) => {
-      const response = await axios(`${API_ENDPOINT}browse/new-releases`, {
-        headers: { Authorization: `Bearer ${userToken}` }
-      })
-      console.log(response);
-      setNewReleases(response.data.albums.items)
-    }
-    fetchNewReleases(token)
-  }, [setNewReleases, token])
+const CardsGroup = ({ displayItems, groupHeader }) => {
 
   return (
     <div className='group'>
-      <h2 className='group-heading'>Hot new releases</h2>
+      <h2 className='group-heading'>{groupHeader}</h2>
       <div className='cards-container'>
         {
-          newReleases
-            ? newReleases
-              .filter((value, index) => index <= 4)
-              .map(album =>
+          displayItems
+            ? displayItems
+              .filter((value, index) => index <= 3)
+              .map(item =>
                 <Card
-                  name={album.name}
-                  imageUrl={album.images[1].url}
-                  artists={album.artists}
-                  key={album.id}
+                  name={item.name}
+                  imageUrl={
+                    item.images.length > 0 ? item.images[1].url : ''
+                  }
+                  artists={item.artists}
+                  key={item.id}
                 />
               )
             : ''
@@ -46,13 +32,5 @@ const CardsGroup = ({ newReleases, token, setNewReleases }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  newReleases: state.recommendation.newReleases,
-  token: state.user.currentUser.token
-})
 
-const mapDispatchToProps = dispatch => ({
-  setNewReleases: newReleases => dispatch(setNewReleases(newReleases))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardsGroup);
+export default CardsGroup;

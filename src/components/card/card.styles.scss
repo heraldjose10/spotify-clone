@@ -18,8 +18,10 @@
 
   .card-image {
     height: 260px;
+    width: 260px;
     max-width: 260px;
     border-radius: 10px;
+    object-fit: cover;
   }
   h4 {
     font-size: 20px;

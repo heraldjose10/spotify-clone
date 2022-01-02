@@ -1,0 +1,20 @@
+.search-page {
+  padding: 40px;
+  width: 100%;
+  h2 {
+    color: white;
+    font-size: 40px;
+  }
+}
+
+.search-cards-grid,
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  color: white;
+  gap: 30px;
+
+  .card {
+    height: 320px;
+  }
+}

@@ -1,0 +1,25 @@
+.search {
+  position: relative;
+
+  .search-box {
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: white;
+    border: none;
+    padding: 2px 44px;
+    font-size: 20px;
+
+    &:focus-visible {
+      outline: none !important;
+    }
+  }
+  .bi.bi-search {
+    color: black;
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-size: 24px;
+  }
+}
+

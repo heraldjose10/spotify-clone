@@ -1,0 +1,7 @@
+const searchActionTypes = {
+  SET_SEARCH_TERM: 'SET_SEARCH_TERM',
+  SET_RETURNED_ARTISTS: 'SET_RETURNED_ARTISTS',
+  SET_RETURNED_TRACKS: 'SET_RETURNED_TRACKS'
+}
+
+export default searchActionTypes

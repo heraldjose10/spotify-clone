@@ -37,6 +37,7 @@ const CardsGrid = ({ token, userId, playlists, setPlaylists }) => {
             imageUrl={playlist.images[0].url}
             name={playlist.name}
             owner={playlist.owner.display_name}
+            playlist={true}
           />
         </Link>
       )}

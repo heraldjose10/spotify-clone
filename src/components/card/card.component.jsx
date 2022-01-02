@@ -4,7 +4,7 @@ import PlayButton from "../play-button/play-button.component";
 
 import './card.styles.scss'
 
-const Card = ({ imageUrl, name, artists, owner, likedSongs }) => (
+const Card = ({ imageUrl, name, artists, owner, playlist }) => (
   <div
     className='card'
   >
@@ -13,9 +13,13 @@ const Card = ({ imageUrl, name, artists, owner, likedSongs }) => (
       src={imageUrl}
       alt='album art'
     />
-    <div className={'button-container'}>
-      <PlayButton />
-    </div>
+    {
+      playlist
+        ? <div className={'button-container'}>
+          <PlayButton />
+        </div>
+        : ''
+    }
     <h4>
       {name.length > 20 ? `${name.substring(0, 20)}...` : name}
     </h4>
@@ -35,7 +39,6 @@ const Card = ({ imageUrl, name, artists, owner, likedSongs }) => (
         ? <p>{`By ${owner}`}</p>
         : ''
     }
-    { }
   </div>
 )
 
