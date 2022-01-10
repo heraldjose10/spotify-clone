@@ -2,20 +2,23 @@ import React from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+import { createStructuredSelector } from "reselect";
 
 import RecentsItem from "../recents-item/recents-item.components";
 
 import { setRecentTracks } from "../../redux/player/player.actions";
 import { API_ENDPOINT } from "../../endpoints";
+import { selectCurrentUserToken } from "../../redux/user/user.selectors";
+import { selectRecentTracks } from "../../redux/player/player.selectors";
 
 import './recents-collection.styles.scss'
 
 
-const RecentsCollection = ({ currentUser, setRecentTracks, recentTracks }) => {
+const RecentsCollection = ({ token, setRecentTracks, recentTracks }) => {
 
   const getRecentSongs = async () => {
     let response = await axios.get(`${API_ENDPOINT}me/player/recently-played`, {
-      headers: { Authorization: `Bearer ${currentUser.token}` },
+      headers: { Authorization: `Bearer ${token}` },
       params: { limit: 8 }
     })
     setRecentTracks(response.data.items)
@@ -43,9 +46,9 @@ const RecentsCollection = ({ currentUser, setRecentTracks, recentTracks }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  recentTracks: state.player.recentTracks
+const mapStateToProps = createStructuredSelector({
+  token: selectCurrentUserToken,
+  recentTracks: selectRecentTracks
 })
 
 const mapDispatchToProps = dispatch => ({

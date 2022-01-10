@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import PlaylistBanner from '../playlist-banner/playlist-banner.component'
 import TracksList from "../tracks-list/tracks-list.component";
@@ -9,6 +10,9 @@ import TracksList from "../tracks-list/tracks-list.component";
 import { API_ENDPOINT } from "../../endpoints";
 import { setLikedSongs } from "../../redux/liked/liked.actions";
 import { setViewingPlaylist } from "../../redux/playlist/playlist.actions";
+import { selectCurrentUserDisplayName, selectCurrentUserToken } from "../../redux/user/user.selectors";
+import { selectLikedDetails, selectLikedTracks } from "../../redux/liked/liked.selectors";
+import { selectViewingPlaylistDetails, selectViewingPlaylistTracks } from "../../redux/playlist/playlist.selectors";
 
 import './playlist.styles.scss'
 
@@ -85,13 +89,14 @@ const Playlist = ({
   )
 }
 
-const mapStateToProps = state => ({
-  token: state.user.currentUser.token,
-  likedTracks: state.liked.songs.tracks,
-  playlistTracks: state.playlist.viewingPlaylist.tracks,
-  playlistDetails: state.playlist.viewingPlaylist.details,
-  likedDetails: state.liked.songs.details,
-  display_name: state.user.currentUser.display_name
+// why take likedTracks from redux store?!! Need FIX!
+const mapStateToProps = createStructuredSelector({
+  token: selectCurrentUserToken,
+  likedTracks: selectLikedTracks,
+  playlistTracks: selectViewingPlaylistTracks,
+  playlistDetails: selectViewingPlaylistDetails,
+  likedDetails: selectLikedDetails,
+  display_name: selectCurrentUserDisplayName
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -3,9 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { API_ENDPOINT } from "../../endpoints";
 import { setPlaylists } from "../../redux/playlist/playlist.actions";
+import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
+import { selectPlaylists } from "../../redux/playlist/playlist.selectors";
 
 import Card from "../card/card.component";
 import LikedSongsCard from "../liked-songs-card/liked-songs-card.component";
@@ -45,10 +48,10 @@ const CardsGrid = ({ token, userId, playlists, setPlaylists }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  token: state.user.currentUser.token,
-  userId: state.user.currentUser.id,
-  playlists: state.playlist.playlists
+const mapStateToProps = createStructuredSelector({
+  token: selectCurrentUserToken,
+  userId: selectCurrentUserId,
+  playlists: selectPlaylists
 })
 
 const mapDispatchToProps = dispatch => ({

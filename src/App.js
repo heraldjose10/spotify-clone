@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './App.css';
 
@@ -11,6 +12,9 @@ import Playlist from './components/playlist/playlist.component';
 import LoginPrompt from './pages/login-prompt/login-prompt.component';
 import MusicPlayer from './components/music-player/music-player.component';
 import SearchPage from './pages/searchpage/searchpage.component';
+
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectNowPlaying } from './redux/player/player.selectors';
 
 function App({ currentUser,nowPlaying }) {
   return (
@@ -37,9 +41,9 @@ function App({ currentUser,nowPlaying }) {
   )
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser,
-  nowPlaying: state.player.nowPlaying
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  nowPlaying: selectNowPlaying
 })
 
 export default connect(mapStateToProps)(App);

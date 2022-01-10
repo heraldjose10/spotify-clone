@@ -1,16 +1,19 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import PlayButton from '../play-button/play-button.component'
 
 import { setLikedSongs } from "../../redux/liked/liked.actions";
+import { selectLikedDetails, selectLikedTracks } from "../../redux/liked/liked.selectors";
+import { selectCurrentUserDisplayName, selectCurrentUserToken } from "../../redux/user/user.selectors";
 import { API_ENDPOINT } from "../../endpoints";
 
 import './liked-songs-card.styles.scss'
 
 
-const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, display_name }) => {
+const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displayName }) => {
 
   useEffect(() => {
     if (likedTracks.length === 0) {
@@ -29,7 +32,7 @@ const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displ
               details: {
                 totalSongs: response.data.total,
                 imageUrl: 'liked',
-                createdBy: display_name
+                createdBy: displayName
               }
             })
           })
@@ -37,7 +40,7 @@ const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displ
       }
       getLikedSongs()
     }
-  }, [token, display_name, setLikedSongs, likedTracks.length])
+  }, [token, displayName, setLikedSongs, likedTracks.length])
 
   return (
     <div className='liked-songs-card'>
@@ -57,11 +60,12 @@ const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displ
   )
 }
 
-const mapStateToProps = state => ({
-  likedTracks: state.liked.songs.tracks,
-  likedDetails: state.liked.songs.details,
-  display_name: state.user.currentUser.display_name,
-  token: state.user.currentUser.token
+
+const mapStateToProps = createStructuredSelector({
+  likedTracks: selectLikedTracks,
+  likedDetails: selectLikedDetails,
+  displayName: selectCurrentUserDisplayName,
+  token: selectCurrentUserToken
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -3,11 +3,14 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { createStructuredSelector } from "reselect";
 
 import { setPlaylists } from "../../redux/playlist/playlist.actions";
 import { API_ENDPOINT } from "../../endpoints";
 
 import './sidebar-playlists-list.styles.scss'
+import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
+import {selectPlaylists} from '../../redux/playlist/playlist.selectors'
 
 
 const SideBarPlaylistsList = ({ playlists, setPlaylists, token, userId }) => {
@@ -39,10 +42,10 @@ const SideBarPlaylistsList = ({ playlists, setPlaylists, token, userId }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  playlists: state.playlist.playlists,
-  token: state.user.currentUser.token,
-  userId: state.user.currentUser.id
+const mapStateToProps = createStructuredSelector({
+  playlists: selectPlaylists,
+  token: selectCurrentUserToken,
+  userId: selectCurrentUserId
 })
 
 const mapDispatchToProps = dispatch => ({

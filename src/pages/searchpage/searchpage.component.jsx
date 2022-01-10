@@ -1,9 +1,17 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
 
 import { API_ENDPOINT } from "../../endpoints"
 import { setReturnedArtists, setReturnedAlbums, setReturnedPlaylists } from "../../redux/search/search.actions"
+import { selectCurrentUserToken } from "../../redux/user/user.selectors"
+import {
+  selectReturnedAlbums,
+  selectReturnedArtists,
+  selectReturnedPlaylists,
+  selectSearchTerm
+} from "../../redux/search/search.selectors"
 
 import SearchBox from "../../components/searchbox/searchbox.component"
 import Card from "../../components/card/card.component"
@@ -100,12 +108,12 @@ const SearchPage = ({
   )
 }
 
-const mapStateToProps = state => ({
-  token: state.user.currentUser.token,
-  searchTerm: state.search.searchTerm,
-  artists: state.search.returnedArtists,
-  albums: state.search.returnedAlbums,
-  playlists: state.search.returnedPlaylists
+const mapStateToProps = createStructuredSelector({
+  token: selectCurrentUserToken,
+  searchTerm: selectSearchTerm,
+  artists: selectReturnedArtists,
+  albums: selectReturnedAlbums,
+  playlists: selectReturnedPlaylists
 })
 
 const mapDispatchToProps = dispatch => ({

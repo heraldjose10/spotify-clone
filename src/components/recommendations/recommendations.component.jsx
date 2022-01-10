@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { setNewReleases } from "../../redux/recommendation/recommendation.actions";
 import { API_ENDPOINT } from "../../endpoints";
+import { selectNewReleases } from "../../redux/recommendation/recommendation.selectors";
+import { selectCurrentUserToken } from "../../redux/user/user.selectors"
 
 import CardsGroup from "../cards-group/cards-group.component";
 
@@ -29,9 +32,9 @@ const Recommendations = ({ token, setNewReleases, newReleases }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  newReleases: state.recommendation.newReleases,
-  token: state.user.currentUser.token
+const mapStateToProps = createStructuredSelector({
+  newReleases: selectNewReleases,
+  token: selectCurrentUserToken
 })
 
 const mapDispatchToProps = dispatch => ({

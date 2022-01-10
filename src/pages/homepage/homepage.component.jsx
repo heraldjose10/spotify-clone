@@ -2,10 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
+import { createStructuredSelector } from "reselect";
 
 import { getAccessTokenFromURL } from '../../authorization/authorization.utils'
 import { setCurrentUser } from '../../redux/user/user.actions'
 import { API_ENDPOINT } from '../../endpoints'
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import GreetingCard from "../../components/greeting-card/greeting-card.component";
 import RecentsCollection from "../../components/recents-collection/recents-collection.component";
@@ -22,7 +24,7 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
         headers: { Authorization: `Bearer ${token}` }
       })
       let userProfile = {
-        display_name: response.data.display_name,
+        displayName: response.data.display_name,
         id: response.data.id
       }
       setCurrentUser({
@@ -51,8 +53,8 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
