@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-const selectRecommendation = state => state.selectRecommendation
+const selectRecommendation = state => state.recommendation
 
 export const selectNewReleases = createSelector(
   [selectRecommendation],
