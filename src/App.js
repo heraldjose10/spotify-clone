@@ -12,19 +12,23 @@ import Playlist from './components/playlist/playlist.component';
 import LoginPrompt from './pages/login-prompt/login-prompt.component';
 import MusicPlayer from './components/music-player/music-player.component';
 import SearchPage from './pages/searchpage/searchpage.component';
+import UserProfileDropdown from './components/user-profile-dropdown/user-profile-dropdown.component';
 
-import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCurrentUser, selectCurrentUserToken } from './redux/user/user.selectors';
 import { selectNowPlaying } from './redux/player/player.selectors';
 
-function App({ currentUser,nowPlaying }) {
+function App({ currentUser, nowPlaying, currentUserToken }) {
   return (
     <div className='app'>
       {
-        currentUser ? <SideBar /> : ''
+        currentUserToken ? <SideBar /> : ''
+      }
+      {
+        currentUserToken ? <UserProfileDropdown /> : ''
       }
       <Routes>
         <Route path='/' element={
-          currentUser ? <HomePage /> : <LoginPrompt />
+          currentUserToken ? <HomePage /> : <LoginPrompt />
         } />
         <Route path='/dash' element={<HomePage />} />
         <Route path='/library' element={<Library />} />
@@ -32,10 +36,10 @@ function App({ currentUser,nowPlaying }) {
           <Route path='liked' element={<Playlist liked={true} />} />
           <Route path=':playlistId' element={<Playlist />} />
         </Route>
-        <Route path='/search' element={<SearchPage/>}/>
+        <Route path='/search' element={<SearchPage />} />
       </Routes>
       {
-        currentUser&& nowPlaying? <MusicPlayer nowPlaying = {nowPlaying}/> : ''
+        currentUser && nowPlaying ? <MusicPlayer /> : ''
       }
     </div>
   )
@@ -43,7 +47,8 @@ function App({ currentUser,nowPlaying }) {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  nowPlaying: selectNowPlaying
+  nowPlaying: selectNowPlaying,
+  currentUserToken: selectCurrentUserToken
 })
 
 export default connect(mapStateToProps)(App);

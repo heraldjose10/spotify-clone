@@ -3,19 +3,23 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { createStructuredSelector } from "reselect";
+import { useNavigate } from "react-router-dom";
 
 import { getAccessTokenFromURL } from '../../authorization/authorization.utils'
 import { setCurrentUser } from '../../redux/user/user.actions'
 import { API_ENDPOINT } from '../../endpoints'
-import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
 
 import GreetingCard from "../../components/greeting-card/greeting-card.component";
 import RecentsCollection from "../../components/recents-collection/recents-collection.component";
 import Recommendations from "../../components/recommendations/recommendations.component";
 
 import './homepage.styles.scss'
+import { selectRecentTracks } from "../../redux/player/player.selectors";
 
-const HomePage = ({ currentUser, setCurrentUser }) => {
+const HomePage = ({ currentUserId, currentUserToken, recentTracks, setCurrentUser }) => {
+
+  let navigate = useNavigate()
 
   useEffect(() => {
 
@@ -31,15 +35,16 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
         token: token,
         ...userProfile
       })
+      navigate('/')
     }
 
-    if (window.location.hash && !currentUser) {
+    if (window.location.hash && currentUserId==null) {
       const token = getAccessTokenFromURL(window.location.hash)
       getUserProfile(token)
     }
-  }, [currentUser, setCurrentUser])
+  }, [setCurrentUser, currentUserId, navigate])
 
-  if (currentUser) {
+  if (currentUserToken) {
     return (
       <div className='homepage'>
         <GreetingCard />
@@ -54,7 +59,9 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUserToken: selectCurrentUserToken,
+  recentTracks: selectRecentTracks,
+  currentUserId: selectCurrentUserId
 })
 
 const mapDispatchToProps = (dispatch) => ({

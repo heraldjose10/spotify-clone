@@ -13,7 +13,7 @@ const TracksList = ({ tracks }) => {
       </div>
       {
         tracks.map(track =>
-          <Track track={track} />
+          <Track track={track} key={track.id}/>
         )
       }
     </div>

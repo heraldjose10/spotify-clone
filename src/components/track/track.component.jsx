@@ -10,8 +10,8 @@ const Track = ({ track, playTrack, setNowPlaying }) => {
     <div
       className='track'
       onClick={() => {
-        playTrack()
         setNowPlaying(track.track)
+        // playTrack()
       }}
     >
       <div className='name cols'>
