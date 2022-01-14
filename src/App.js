@@ -14,10 +14,10 @@ import MusicPlayer from './components/music-player/music-player.component';
 import SearchPage from './pages/searchpage/searchpage.component';
 import UserProfileDropdown from './components/user-profile-dropdown/user-profile-dropdown.component';
 
-import { selectCurrentUser, selectCurrentUserToken } from './redux/user/user.selectors';
+import { selectCurrentUserToken } from './redux/user/user.selectors';
 import { selectNowPlaying } from './redux/player/player.selectors';
 
-function App({ currentUser, nowPlaying, currentUserToken }) {
+function App({ nowPlaying, currentUserToken }) {
   return (
     <div className='app'>
       {
@@ -39,14 +39,13 @@ function App({ currentUser, nowPlaying, currentUserToken }) {
         <Route path='/search' element={<SearchPage />} />
       </Routes>
       {
-        currentUser && nowPlaying ? <MusicPlayer /> : ''
+        currentUserToken && nowPlaying ? <MusicPlayer /> : ''
       }
     </div>
   )
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
   nowPlaying: selectNowPlaying,
   currentUserToken: selectCurrentUserToken
 })

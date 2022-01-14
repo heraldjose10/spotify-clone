@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-// import persistReducer from "redux-persist/es/persistReducer";
-// import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/es/persistReducer";
+import storage from "redux-persist/lib/storage";
 
 import userReducer from "./user/user.reducer";
 import playerReducer from "./player/player.reducer";
@@ -10,11 +10,11 @@ import recommendationReducer from "./recommendation/recommendation.reducer";
 import searchReducer from "./search/search.reducer";
 
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-//   whiteList: ['liked']
-// }
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['user', 'player'],
+}
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -25,5 +25,4 @@ const rootReducer = combineReducers({
   search: searchReducer
 })
 
-// export default persistReducer(persistConfig, rootReducer)
-export default rootReducer
+export default persistReducer(persistConfig, rootReducer)
