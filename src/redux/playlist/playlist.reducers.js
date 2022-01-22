@@ -20,6 +20,14 @@ const playlistReducer = (state = INITIAL_STATE, action) => {
         ...state,
         viewingPlaylist: action.payload
       }
+    case playlistActionTypes.REMOVE_VIEWING_PLAYLIST:
+      return {
+        ...state,
+        viewingPlaylist: {
+          details: {},
+          tracks: []
+        }
+      }
     default:
       return state
   }

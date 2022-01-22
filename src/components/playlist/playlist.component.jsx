@@ -9,7 +9,7 @@ import TracksList from "../tracks-list/tracks-list.component";
 
 import { API_ENDPOINT } from "../../endpoints";
 import { setLikedSongs } from "../../redux/liked/liked.actions";
-import { setViewingPlaylist } from "../../redux/playlist/playlist.actions";
+import { removeViewingPlaylist, setViewingPlaylist } from "../../redux/playlist/playlist.actions";
 import { selectCurrentUserDisplayName, selectCurrentUserToken } from "../../redux/user/user.selectors";
 import { selectLikedDetails, selectLikedTracks } from "../../redux/liked/liked.selectors";
 import { selectViewingPlaylistDetails, selectViewingPlaylistTracks } from "../../redux/playlist/playlist.selectors";
@@ -21,6 +21,7 @@ const Playlist = ({
   token,
   setLikedSongs,
   setViewingPlaylist,
+  removeViewingPlaylist,
   likedTracks,
   likedDetails,
   playlistTracks,
@@ -79,7 +80,9 @@ const Playlist = ({
     else {
       fetchPlaylistInfo()
     }
-  }, [playlistId, liked, setLikedSongs, token, setViewingPlaylist, display_name])
+
+    return () => removeViewingPlaylist()
+  }, [playlistId, liked, setLikedSongs, token, setViewingPlaylist, display_name, removeViewingPlaylist])
 
   return (
     <div className="playlist">
@@ -101,7 +104,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   setLikedSongs: likedSongs => dispatch(setLikedSongs(likedSongs)),
-  setViewingPlaylist: viewingPlaylist => dispatch(setViewingPlaylist(viewingPlaylist))
+  setViewingPlaylist: viewingPlaylist => dispatch(setViewingPlaylist(viewingPlaylist)),
+  removeViewingPlaylist: () => dispatch(removeViewingPlaylist())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);
