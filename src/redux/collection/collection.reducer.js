@@ -26,6 +26,19 @@ const collectionReducer = (state = INITIAL_STATE, action) => {
           details: {}
         }
       }
+    case collectionActionTypes.SET_PLAYLIST:
+      return {
+        ...state,
+        playlist: action.payload
+      }
+    case collectionActionTypes.REMOVE_PLAYLIST:
+      return {
+        ...state,
+        playlist: {
+          items: [],
+          details: {}
+        }
+      }
     default:
       return {
         ...state

@@ -49,16 +49,7 @@ const Track = ({ track, setNowPlaying }) => {
       {
         track.album
           ? ''
-          : (
-            <span className='artists cols'>
-              {
-                track.artists.reduce((artistsString, artist) =>
-                  artistsString += ` ${artist.name},`
-                  , ''
-                )
-              }
-            </span>
-          )
+          : ''
       }
       {
         track.album

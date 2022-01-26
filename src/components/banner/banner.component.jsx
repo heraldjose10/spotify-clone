@@ -10,7 +10,8 @@ const Banner = ({
   total,
   releaseDate,
   description,
-  followers
+  followers,
+  createdBy
 }) => {
 
   const artistsString = type === 'album'
@@ -40,6 +41,7 @@ const Banner = ({
           {
             `
             ${artistsString}
+            ${createdBy}
             | ${total} songs
             ${releaseYear ? `| ${releaseYear}` : ''}
             ${followers ? ` | ${followers} likes` : ''}

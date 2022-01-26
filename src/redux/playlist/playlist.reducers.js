@@ -2,10 +2,6 @@ import { playlistActionTypes } from "./playlist.types"
 
 const INITIAL_STATE = {
   playlists: [],
-  viewingPlaylist: {
-    details: {},
-    tracks: []
-  }
 }
 
 const playlistReducer = (state = INITIAL_STATE, action) => {
@@ -14,19 +10,6 @@ const playlistReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         playlists: action.payload
-      }
-    case playlistActionTypes.SET_VIEWING_PLAYLIST:
-      return {
-        ...state,
-        viewingPlaylist: action.payload
-      }
-    case playlistActionTypes.REMOVE_VIEWING_PLAYLIST:
-      return {
-        ...state,
-        viewingPlaylist: {
-          details: {},
-          tracks: []
-        }
       }
     default:
       return state

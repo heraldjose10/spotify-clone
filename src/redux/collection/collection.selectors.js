@@ -9,5 +9,13 @@ export const selectAlbum = createSelector(
 
 export const selectPlaylist = createSelector(
   [selectCollection],
-  collection => collection.playlist
+  collection => ({
+    details: collection.playlist.details,
+    items: collection.playlist.items.map(
+      track => ({
+        ...track.track,
+        added_at: track.added_at
+      })
+    )
+  })
 )

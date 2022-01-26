@@ -8,13 +8,13 @@ const TracksList = ({ tracks, type }) => {
       <div className='list-header'>
         <span className='name heading'>title</span>
         {
-          type == 'playlist' ? <span className='album heading'>album</span> : ''
+          type === 'playlist' ? <span className='album heading'>album</span> : ''
         }
         {
-          type == 'playlist' ? <span className='date heading'>date added</span> : ''
+          type === 'playlist' ? <span className='date heading'>date added</span> : ''
         }
         {
-          type == 'album' ? <span className='artists heading'>artists</span> : ''
+          type === 'album' ? <span className='artists heading'>artists</span> : ''
         }
         <span className='duration heading'>time</span>
       </div>
