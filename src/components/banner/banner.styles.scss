@@ -26,6 +26,8 @@
     h1 {
       margin: 0;
       font-size: 92px;
+      max-height: 250px;
+      overflow: hidden;
     }
 
     .description{

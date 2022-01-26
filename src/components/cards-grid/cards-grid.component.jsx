@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { API_ENDPOINT } from "../../endpoints";
-import { setPlaylists } from "../../redux/playlist/playlist.actions";
+import { setCurrentUserPlaylists } from "../../redux/user/user.actions";
 import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
-import { selectPlaylists } from "../../redux/playlist/playlist.selectors";
+import { selectCurrentUserPlaylists } from "../../redux/user/user.selectors";
 
 import Card from "../card/card.component";
 import LikedSongsCard from "../liked-songs-card/liked-songs-card.component";
@@ -28,7 +28,7 @@ const CardsGrid = ({ token, userId, playlists, setPlaylists }) => {
     
     getUserPlaylists(userId, token)
   }, [userId, token, setPlaylists])
-
+  console.log(playlists);
   return (
     <div className='cards-grid'>
       <Link to='/playlist/liked' className="liked">
@@ -51,11 +51,11 @@ const CardsGrid = ({ token, userId, playlists, setPlaylists }) => {
 const mapStateToProps = createStructuredSelector({
   token: selectCurrentUserToken,
   userId: selectCurrentUserId,
-  playlists: selectPlaylists
+  playlists: selectCurrentUserPlaylists
 })
 
 const mapDispatchToProps = dispatch => ({
-  setPlaylists: (playlists) => dispatch(setPlaylists(playlists))
+  setPlaylists: (playlists) => dispatch(setCurrentUserPlaylists(playlists))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardsGrid)

@@ -21,3 +21,8 @@ export const selectCurrentUserId = createSelector(
   [selectCurrentUser],
   currentUser => currentUser.id
 )
+
+export const selectCurrentUserPlaylists = createSelector(
+  [selectCurrentUser],
+  currentUser => currentUser.playlists
+)

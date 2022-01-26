@@ -16,10 +16,14 @@ const Recommendations = ({ token, setNewReleases, newReleases }) => {
 
   useEffect(() => {
     const fetchNewReleases = async (userToken) => {
-      const response = await axios(`${API_ENDPOINT}browse/new-releases`, {
-        headers: { Authorization: `Bearer ${userToken}` }
-      })
-      setNewReleases(response.data.albums.items)
+      try {
+        const response = await axios(`${API_ENDPOINT}browse/new-releases`, {
+          headers: { Authorization: `Bearer ${userToken}` }
+        })
+        setNewReleases(response.data.albums.items)
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchNewReleases(token)
   }, [setNewReleases, token])

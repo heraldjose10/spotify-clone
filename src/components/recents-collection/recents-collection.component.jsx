@@ -25,10 +25,7 @@ const RecentsCollection = ({ token, setRecentTracks, recentTracks }) => {
   }
 
   useEffect(() => {
-    if (recentTracks.length === 0) {
-      // update tracks if recent tracks array is empty
-      getRecentSongs()
-    }
+    getRecentSongs()
   })
 
   return (

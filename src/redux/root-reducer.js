@@ -4,7 +4,6 @@ import storage from "redux-persist/lib/storage";
 
 import userReducer from "./user/user.reducer";
 import playerReducer from "./player/player.reducer";
-import playlistReducer from "./playlist/playlist.reducers";
 import likedReducer from "./liked/liked.reducer";
 import recommendationReducer from "./recommendation/recommendation.reducer";
 import searchReducer from "./search/search.reducer";
@@ -20,7 +19,6 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   player: playerReducer,
-  playlist: playlistReducer,
   liked: likedReducer,
   recommendation: recommendationReducer,
   search: searchReducer,

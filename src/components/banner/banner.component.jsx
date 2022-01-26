@@ -20,6 +20,8 @@ const Banner = ({
 
   const releaseYear = releaseDate ? releaseDate.slice(0, 4) : null
 
+  const nameHeaderFontSize = name.length > 30 ? '50px' : '92px'
+
   return (
     <div className='banner'>
       {
@@ -31,7 +33,11 @@ const Banner = ({
       }
       <div className='playlist-info'>
         <p>{type.toUpperCase()}</p>
-        <h1>{name}</h1>
+        <h1
+          style={{
+            fontSize: nameHeaderFontSize
+          }}
+        >{name}</h1>
         {
           description
             ? <p className='description'>{description}</p>
@@ -41,7 +47,7 @@ const Banner = ({
           {
             `
             ${artistsString}
-            ${createdBy}
+            ${createdBy ? createdBy : ''}
             | ${total} songs
             ${releaseYear ? `| ${releaseYear}` : ''}
             ${followers ? ` | ${followers} likes` : ''}

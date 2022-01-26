@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   currentUser: {
     token: null,
     displayName: null,
-    id: null
+    id: null,
+    playlists: []
   }
 }
 
@@ -16,7 +17,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         currentUser: action.payload
       })
     }
-    case userActionTypes.LOGOUT_CURRENT_USER:{
+    case userActionTypes.LOGOUT_CURRENT_USER: {
       return ({
         ...state,
         currentUser: {
@@ -25,6 +26,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
           id: null
         }
       })
+    }
+    case userActionTypes.SET_CURRENT_USER_PLAYLISTS: {
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          playlists: action.payload
+        }
+      }
     }
     default:
       return state

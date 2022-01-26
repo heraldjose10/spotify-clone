@@ -49,7 +49,16 @@ const Track = ({ track, setNowPlaying }) => {
       {
         track.album
           ? ''
-          : ''
+          : (
+            <span className='artists cols'>
+              {
+                track.artists.map(artist =>
+                  artist.name
+                )
+                  .join(' + ')
+              }
+            </span>
+          )
       }
       {
         track.album
