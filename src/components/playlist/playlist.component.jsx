@@ -4,7 +4,6 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import PlaylistBanner from '../playlist-banner/playlist-banner.component'
 import TracksList from "../tracks-list/tracks-list.component";
 
 import { API_ENDPOINT } from "../../endpoints";
@@ -15,6 +14,7 @@ import { selectLikedDetails, selectLikedTracks } from "../../redux/liked/liked.s
 import { selectViewingPlaylistDetails, selectViewingPlaylistTracks } from "../../redux/playlist/playlist.selectors";
 
 import './playlist.styles.scss'
+import Banner from "../banner/banner.component";
 
 const Playlist = ({
   liked,
@@ -43,9 +43,9 @@ const Playlist = ({
             details: {
               id: response.data.id,
               name: response.data.name,
-              imageUrl: response.data.images[0].url,
+              albumArtURL: response.data.images[0].url,
               createdBy: response.data.owner.display_name,
-              totalSongs: response.data.tracks.total,
+              total: response.data.tracks.total,
               description: response.data.description,
               followers: response.data.followers.total
             },
@@ -86,8 +86,8 @@ const Playlist = ({
 
   return (
     <div className="playlist">
-      <PlaylistBanner details={liked ? likedDetails : playlistDetails} />
-      <TracksList tracks={liked ? likedTracks : playlistTracks} />
+      <Banner {...playlistDetails} type={'playlist'} />
+      <TracksList tracks={liked ? likedTracks : playlistTracks} type={'playlist'} />
     </div>
   )
 }

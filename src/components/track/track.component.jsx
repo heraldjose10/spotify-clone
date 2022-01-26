@@ -1,32 +1,80 @@
 import { connect } from 'react-redux'
+import Moment from 'react-moment';
+import moment from 'moment'
+import { Link } from 'react-router-dom';
 
-import { playTrack } from '../../redux/player/player.actions'
 import { setNowPlaying } from '../../redux/player/player.actions'
 
 import './track.styles.scss'
 
-const Track = ({ track, playTrack, setNowPlaying }) => {
+const Track = ({ track, setNowPlaying }) => {
+
+  const convertToRuntime = (timeInMilliseconds) => {
+    const duration = moment.duration(timeInMilliseconds)
+    const minutes = duration.minutes();
+    const seconds = duration.seconds();
+    return `${minutes >= 10 ? minutes : '0' + minutes}:${seconds >= 10 ? seconds : '0' + seconds}`
+  }
+
+  const stopBubbling = (e) => {
+    e.stopPropagation()
+  }
+
   return (
     <div
       className='track'
       onClick={() => {
-        setNowPlaying(track.track)
-        // playTrack()
+        setNowPlaying(track)
       }}
     >
       <div className='name cols'>
-        <img src={track.track.album.images[2].url} alt='album-art' />
-        <span>{track.track.name}</span>
+        {
+          track.album ? <img src={track.album.images[2].url} alt='album-art' /> : ''
+        }
+        <span>{track.name}</span>
       </div>
-      <span className='album cols'>{track.track.album.name}</span>
-      <span className='added cols'>{track.added_at}</span>
-      <span className='duration cols'>{track.track.duration_ms}</span>
+      {
+        track.album
+          ? (
+            <Link
+              to={`/album/${track.album.id}`}
+              className='album cols'
+              onClick={stopBubbling}
+            >
+              <span >{track.album.name}</span>
+            </Link>
+          )
+          : ''
+      }
+      {
+        track.album
+          ? ''
+          : (
+            <span className='artists cols'>
+              {
+                track.artists.reduce((artistsString, artist) =>
+                  artistsString += ` ${artist.name},`
+                  , ''
+                )
+              }
+            </span>
+          )
+      }
+      {
+        track.album
+          ? (
+            <span className='added cols'>
+              <Moment fromNow>{track.added_at}</Moment>
+            </span>
+          )
+          : ''
+      }
+      <span className='duration cols'>{convertToRuntime(track.duration_ms)}</span>
     </div>
   )
 }
 
 const mapDispatchToProps = dispatch => ({
-  playTrack: () => dispatch(playTrack()),
   setNowPlaying: track => dispatch(setNowPlaying(track))
 })
 

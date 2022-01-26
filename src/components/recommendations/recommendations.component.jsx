@@ -26,7 +26,11 @@ const Recommendations = ({ token, setNewReleases, newReleases }) => {
 
   return (
     <div className='recommendations'>
-      <CardsGroup displayItems={newReleases} groupHeader={'Hot new releases'} />
+      <CardsGroup
+        displayItems={newReleases}
+        groupHeader={'Hot new releases'}
+        groupType={'album'}
+      />
     </div>
   )
 }

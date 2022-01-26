@@ -13,9 +13,11 @@ import LoginPrompt from './pages/login-prompt/login-prompt.component';
 import MusicPlayer from './components/music-player/music-player.component';
 import SearchPage from './pages/searchpage/searchpage.component';
 import UserProfileDropdown from './components/user-profile-dropdown/user-profile-dropdown.component';
+import AlbumPage from './pages/album-page/album-page.componenent';
 
 import { selectCurrentUserToken } from './redux/user/user.selectors';
 import { selectNowPlaying } from './redux/player/player.selectors';
+import Collection from './components/collection/collection.component';
 
 function App({ nowPlaying, currentUserToken }) {
   return (
@@ -37,6 +39,9 @@ function App({ nowPlaying, currentUserToken }) {
           <Route path=':playlistId' element={<Playlist />} />
         </Route>
         <Route path='/search' element={<SearchPage />} />
+        <Route path='/album' element={<AlbumPage />}>
+          <Route path=':albumid' element={<Collection collectionType={'album'} />} />
+        </Route>
       </Routes>
       {
         currentUserToken && nowPlaying ? <MusicPlayer /> : ''

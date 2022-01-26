@@ -8,6 +8,7 @@ import playlistReducer from "./playlist/playlist.reducers";
 import likedReducer from "./liked/liked.reducer";
 import recommendationReducer from "./recommendation/recommendation.reducer";
 import searchReducer from "./search/search.reducer";
+import collectionReducer from "./collection/collection.reducer";
 
 
 const persistConfig = {
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   playlist: playlistReducer,
   liked: likedReducer,
   recommendation: recommendationReducer,
-  search: searchReducer
+  search: searchReducer,
+  collection: collectionReducer
 })
 
 export default persistReducer(persistConfig, rootReducer)

@@ -1,0 +1,6 @@
+export const collectionActionTypes = {
+  SET_ALBUM: 'SET_ALBUM',
+  SET_PLAYLIST: 'SET_PLAYLIST',
+  REMOVE_ALBUM: 'REMOVE_ALBUM',
+  REMOVE_PLAYLIST: 'REMOVE_PLAYLIST'
+}

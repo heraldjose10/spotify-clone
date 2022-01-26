@@ -9,7 +9,12 @@ export const selectViewingPlaylist = createSelector(
 
 export const selectViewingPlaylistTracks = createSelector(
   [selectViewingPlaylist],
-  viewingPlaylist => viewingPlaylist.tracks
+  viewingPlaylist => viewingPlaylist.tracks.map(
+    track => ({
+      ...track.track,
+      added_at: track.added_at
+    })
+  )
 )
 
 export const selectViewingPlaylistDetails = createSelector(

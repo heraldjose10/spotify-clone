@@ -75,9 +75,9 @@ const SearchPage = ({
   }, [token, searchTerm, setReturnedArtists, setReturnedAlbums, setReturnedPlaylists])
 
   const searchResults = <div className="search-results">
-    <CardsGroup displayItems={artists} groupHeader={'Artists'} />
-    <CardsGroup displayItems={albums} groupHeader={'Albums'} />
-    <CardsGroup displayItems={playlists} groupHeader={'Playlists'} />
+    <CardsGroup displayItems={artists} groupHeader={'Artists'} groupType={'artist'} />
+    <CardsGroup displayItems={albums} groupHeader={'Albums'} groupType={'album'} />
+    <CardsGroup displayItems={playlists} groupHeader={'Playlists'} groupType={'playlist'} />
   </div>
 
   const browseSection = <div className="browse">

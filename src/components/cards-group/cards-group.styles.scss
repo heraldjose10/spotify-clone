@@ -17,5 +17,14 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     // justify-content: space-between;
     max-height: 400px;
+
+    .card-item{
+      text-decoration: none;
+      color: white;
+
+      :hover{
+        background-color: #5e736b;
+      }
+    }
   }
 }
