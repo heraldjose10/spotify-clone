@@ -7,6 +7,11 @@ export const selectCurrentUser = createSelector(
   user => user.currentUser
 )
 
+export const selectUserPlaylists = createSelector(
+  [selectUser],
+  user => user.playlists
+)
+
 export const selectCurrentUserToken = createSelector(
   [selectCurrentUser],
   currentUser => currentUser.token
@@ -22,7 +27,7 @@ export const selectCurrentUserId = createSelector(
   currentUser => currentUser.id
 )
 
-export const selectCurrentUserPlaylists = createSelector(
-  [selectCurrentUser],
-  currentUser => currentUser.playlists
+export const selectUserPlaylistsItems = createSelector(
+  [selectUserPlaylists],
+  playlists => playlists.items
 )

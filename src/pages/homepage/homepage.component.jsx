@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import axios from "axios";
 import { createStructuredSelector } from "reselect";
 import { useNavigate } from "react-router-dom";
 
 import { getAccessTokenFromURL } from '../../authorization/authorization.utils'
-import { setCurrentUser } from '../../redux/user/user.actions'
-import { API_ENDPOINT } from '../../endpoints'
+import { fetchCurrentUserAsync } from '../../redux/user/user.actions'
 import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
 
 import GreetingCard from "../../components/greeting-card/greeting-card.component";
@@ -15,34 +13,21 @@ import RecentsCollection from "../../components/recents-collection/recents-colle
 import Recommendations from "../../components/recommendations/recommendations.component";
 
 import './homepage.styles.scss'
-import { selectRecentTracks } from "../../redux/player/player.selectors";
 
-const HomePage = ({ currentUserId, currentUserToken, recentTracks, setCurrentUser }) => {
+const HomePage = ({ currentUserId, currentUserToken, fetchCurrentUserAsync }) => {
 
   let navigate = useNavigate()
 
   useEffect(() => {
 
-    const getUserProfile = async (token) => {
-      let response = await axios(`${API_ENDPOINT}me`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      let userProfile = {
-        displayName: response.data.display_name,
-        id: response.data.id
-      }
-      setCurrentUser({
-        token: token,
-        ...userProfile
-      })
+    if (window.location.hash && currentUserId == null) {
+      const token = getAccessTokenFromURL(window.location.hash)
+      fetchCurrentUserAsync(token)
+    }
+    else{
       navigate('/')
     }
-
-    if (window.location.hash && currentUserId==null) {
-      const token = getAccessTokenFromURL(window.location.hash)
-      getUserProfile(token)
-    }
-  }, [setCurrentUser, currentUserId, navigate])
+  }, [fetchCurrentUserAsync, currentUserId, navigate])
 
   if (currentUserToken) {
     return (
@@ -60,12 +45,11 @@ const HomePage = ({ currentUserId, currentUserToken, recentTracks, setCurrentUse
 
 const mapStateToProps = createStructuredSelector({
   currentUserToken: selectCurrentUserToken,
-  recentTracks: selectRecentTracks,
   currentUserId: selectCurrentUserId
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  fetchCurrentUserAsync: (token) => dispatch(fetchCurrentUserAsync(token))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

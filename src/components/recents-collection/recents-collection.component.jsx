@@ -16,17 +16,16 @@ import './recents-collection.styles.scss'
 
 const RecentsCollection = ({ token, setRecentTracks, recentTracks }) => {
 
-  const getRecentSongs = async () => {
-    let response = await axios.get(`${API_ENDPOINT}me/player/recently-played`, {
-      headers: { Authorization: `Bearer ${token}` },
-      params: { limit: 8 }
-    })
-    setRecentTracks(response.data.items)
-  }
-
   useEffect(() => {
+    const getRecentSongs = async () => {
+      let response = await axios.get(`${API_ENDPOINT}me/player/recently-played`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: { limit: 8 }
+      })
+      setRecentTracks(response.data.items)
+    }
     getRecentSongs()
-  })
+  }, [setRecentTracks, token])
 
   return (
     <div className='recents-collection'>

@@ -2,28 +2,20 @@ import { connect } from "react-redux";
 import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { createStructuredSelector } from "reselect";
 
-import { setCurrentUserPlaylists } from "../../redux/user/user.actions";
-import { API_ENDPOINT } from "../../endpoints";
+import { fetchUserPlaylistsStartAsync } from "../../redux/user/user.actions";
 import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
-import { selectCurrentUserPlaylists } from "../../redux/user/user.selectors";
+import { selectUserPlaylistsItems } from "../../redux/user/user.selectors";
 
 import './sidebar-playlists-list.styles.scss'
 
 
-const SideBarPlaylistsList = ({ playlists, setPlaylists, token, userId }) => {
+const SideBarPlaylistsList = ({ playlists, fetchUserPlaylistsStartAsync, token, userId }) => {
 
   useEffect(() => {
-    const getUserPlaylists = async (userId, userToken) => {
-      let response = await axios(`${API_ENDPOINT}users/${userId}/playlists`, {
-        headers: { Authorization: `Bearer ${userToken}` },
-      })
-      setPlaylists(response.data.items)
-    }
-    getUserPlaylists(userId, token)
-  }, [userId, token, setPlaylists])
+    fetchUserPlaylistsStartAsync({token, userId})
+  }, [token, userId, fetchUserPlaylistsStartAsync])
 
   return (
     <div className='list'>
@@ -43,13 +35,13 @@ const SideBarPlaylistsList = ({ playlists, setPlaylists, token, userId }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  playlists: selectCurrentUserPlaylists,
+  playlists: selectUserPlaylistsItems,
   token: selectCurrentUserToken,
   userId: selectCurrentUserId
 })
 
 const mapDispatchToProps = dispatch => ({
-  setPlaylists: playlists => dispatch(setCurrentUserPlaylists(playlists))
+  fetchUserPlaylistsStartAsync: (playlists) => dispatch(fetchUserPlaylistsStartAsync(playlists))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBarPlaylistsList);
