@@ -7,17 +7,37 @@ export const selectSearchTerm = createSelector(
   search => search.searchTerm
 )
 
-export const selectReturnedArtists = createSelector(
+export const selectArtists = createSelector(
   [selectSearch],
-  search => search.returnedArtists
+  search => search.artists
 )
 
-export const selectReturnedAlbums = createSelector(
-  [selectSearch],
-  search => search.returnedAlbums
+export const selectArtistsItems = createSelector(
+  [selectArtists],
+  artists => artists.items
 )
 
-export const selectReturnedPlaylists = createSelector(
+export const selectAlbums = createSelector(
   [selectSearch],
-  search => search.returnedPlaylists
+  search => search.albums
+)
+
+export const selectAlbumsItems = createSelector(
+  [selectAlbums],
+  albums => albums.items
+)
+
+export const selectPlaylists = createSelector(
+  [selectSearch],
+  search => search.playlists
+)
+
+export const selectPlaylistsItems = createSelector(
+  [selectPlaylists],
+  playlists => playlists.items
+)
+
+export const selectCategories = createSelector(
+  [selectSearch],
+  search => search.categories
 )

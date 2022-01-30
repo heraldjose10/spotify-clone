@@ -41,7 +41,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchUserPlaylistsStartAsync: (playlists) => dispatch(fetchUserPlaylistsStartAsync(playlists))
+  fetchUserPlaylistsStartAsync: (credentials) => dispatch(fetchUserPlaylistsStartAsync(credentials))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBarPlaylistsList);

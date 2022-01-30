@@ -1,16 +1,18 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { connect } from "react-redux"
 import { createStructuredSelector } from "reselect"
 
-import { API_ENDPOINT } from "../../endpoints"
-import { setReturnedArtists, setReturnedAlbums, setReturnedPlaylists } from "../../redux/search/search.actions"
+import {
+  fetchCategoriesAsync,
+  fetchSearchResulstsAsync
+} from "../../redux/search/search.actions"
 import { selectCurrentUserToken } from "../../redux/user/user.selectors"
 import {
-  selectReturnedAlbums,
-  selectReturnedArtists,
-  selectReturnedPlaylists,
-  selectSearchTerm
+  selectCategories,
+  selectArtistsItems,
+  selectSearchTerm,
+  selectAlbumsItems,
+  selectPlaylistsItems
 } from "../../redux/search/search.selectors"
 
 import SearchBox from "../../components/searchbox/searchbox.component"
@@ -22,57 +24,24 @@ import './searchpage.styles.scss'
 const SearchPage = ({
   searchTerm,
   token,
-  setReturnedArtists,
-  setReturnedAlbums,
-  setReturnedPlaylists,
   artists,
   albums,
-  playlists
+  playlists,
+  categories,
+  fetchSearchResulstsAsync,
+  fetchCategoriesAsync
 }) => {
 
-  const [categories, setCategories] = useState([])
-
   useEffect(() => {
-    const headers = { Authorization: `Bearer ${token}` }
-
-    const getCategories = () => {
-      axios({
-        method: 'get',
-        headers: headers,
-        url: `${API_ENDPOINT}browse/categories`
-      })
-        .then(result => setCategories(result.data.categories.items))
-        .catch(error => console.log(error))
+    if (searchTerm.length > 0) {
+      fetchSearchResulstsAsync({ token, searchTerm, type: 'artist' })
+      fetchSearchResulstsAsync({ token, searchTerm, type: 'album' })
+      fetchSearchResulstsAsync({ token, searchTerm, type: 'playlist' })
     }
-
-    const fetchSearchResults = () => {
-      axios({
-        method: 'get',
-        headers: headers,
-        url: `${API_ENDPOINT}search?q=${searchTerm}&type=artist`
-      })
-        .then(result => setReturnedArtists(result.data.artists.items))
-        .catch(error => console.log(error))
-      axios({
-        method: 'get',
-        headers: headers,
-        url: `${API_ENDPOINT}search?q=${searchTerm}&type=album`
-      })
-        .then(result => setReturnedAlbums(result.data.albums.items))
-        .catch(error => console.log(error))
-      axios({
-        method: 'get',
-        headers: headers,
-        url: `${API_ENDPOINT}search?q=${searchTerm}&type=playlist`
-      })
-        .then(result => setReturnedPlaylists(result.data.playlists.items))
-        .catch(error => console.log(error))
+    else {
+      fetchCategoriesAsync({ token })
     }
-
-    searchTerm.length > 0
-      ? fetchSearchResults()
-      : getCategories()
-  }, [token, searchTerm, setReturnedArtists, setReturnedAlbums, setReturnedPlaylists])
+  }, [token, searchTerm, fetchSearchResulstsAsync, fetchCategoriesAsync])
 
   const searchResults = <div className="search-results">
     <CardsGroup displayItems={artists} groupHeader={'Artists'} groupType={'artist'} />
@@ -111,15 +80,15 @@ const SearchPage = ({
 const mapStateToProps = createStructuredSelector({
   token: selectCurrentUserToken,
   searchTerm: selectSearchTerm,
-  artists: selectReturnedArtists,
-  albums: selectReturnedAlbums,
-  playlists: selectReturnedPlaylists
+  artists: selectArtistsItems,
+  albums: selectAlbumsItems,
+  playlists: selectPlaylistsItems,
+  categories: selectCategories
 })
 
 const mapDispatchToProps = dispatch => ({
-  setReturnedArtists: returnedArtists => dispatch(setReturnedArtists(returnedArtists)),
-  setReturnedAlbums: returnedAlbums => dispatch(setReturnedAlbums(returnedAlbums)),
-  setReturnedPlaylists: returnedPlaylists => dispatch(setReturnedPlaylists(returnedPlaylists))
+  fetchCategoriesAsync: (data) => dispatch(fetchCategoriesAsync(data)),
+  fetchSearchResulstsAsync: (data) => dispatch(fetchSearchResulstsAsync(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)
