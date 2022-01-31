@@ -19,3 +19,16 @@ export const selectPlaylist = createSelector(
     )
   })
 )
+
+export const selectLikedTracks = createSelector(
+  [selectCollection],
+  collection => ({
+    details: collection.likedTracks.details,
+    items: collection.likedTracks.items.map(
+      item => ({
+        ...item.track,
+        added_at: item.added_at
+      })
+    )
+  })
+)

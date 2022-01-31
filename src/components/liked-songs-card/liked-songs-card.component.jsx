@@ -1,58 +1,36 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import PlayButton from '../play-button/play-button.component'
+import { selectLikedTracks } from "../../redux/collection/collection.selectors";
+import {
+  selectCurrentUserDisplayName,
+  selectCurrentUserToken
+} from "../../redux/user/user.selectors";
+import { fetchLikedTracksAsync } from "../../redux/collection/collection.actions";
 
-import { setLikedSongs } from "../../redux/liked/liked.actions";
-import { selectLikedDetails, selectLikedTracks } from "../../redux/liked/liked.selectors";
-import { selectCurrentUserDisplayName, selectCurrentUserToken } from "../../redux/user/user.selectors";
-import { API_ENDPOINT } from "../../endpoints";
+import PlayButton from '../play-button/play-button.component'
 
 import './liked-songs-card.styles.scss'
 
 
-const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displayName }) => {
+const LikedSongsCard = ({ likedTracks, token, displayName, fetchLikedTracksAsync }) => {
 
   useEffect(() => {
-    if (likedTracks.length === 0) {
-      const getLikedSongs = () => {
-        axios({
-          method: 'get',
-          headers: {
-            'Access-Control-Allow-Headers': '*',
-            Authentication: `Bearer ${token}`,
-          },
-          url: `${API_ENDPOINT}me/tracks`
-        })
-          .then(response => {
-            setLikedSongs({
-              tracks: response.data.items,
-              details: {
-                totalSongs: response.data.total,
-                imageUrl: 'liked',
-                createdBy: displayName
-              }
-            })
-          })
-          .catch(error => console.log(error))
-      }
-      getLikedSongs()
-    }
-  }, [token, displayName, setLikedSongs, likedTracks.length])
+    fetchLikedTracksAsync({ token, displayName })
+  }, [fetchLikedTracksAsync, token, displayName])
 
   return (
     <div className='liked-songs-card'>
       <p>
         {
-          likedTracks
+          likedTracks.items
             .filter((ele, index) => index < 8)
-            .map((song) => `${song.track.name} | `)
+            .map((song) => `${song.name} | `)
         }
       </p>
       <h4>Liked Songs</h4>
-      <p>{`${likedDetails.totalSongs ? likedDetails.totalSongs : ''} liked songs`}</p>
+      <p>{`${likedTracks.details.total ? likedTracks.details.total : ''} liked songs`}</p>
       <div className='button-container'>
         <PlayButton className='button'></PlayButton>
       </div>
@@ -63,13 +41,12 @@ const LikedSongsCard = ({ likedTracks, likedDetails, setLikedSongs, token, displ
 
 const mapStateToProps = createStructuredSelector({
   likedTracks: selectLikedTracks,
-  likedDetails: selectLikedDetails,
   displayName: selectCurrentUserDisplayName,
   token: selectCurrentUserToken
 })
 
 const mapDispatchToProps = dispatch => ({
-  setLikedSongs: likedSongs => dispatch(setLikedSongs(likedSongs))
+  fetchLikedTracksAsync: data => dispatch(fetchLikedTracksAsync(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikedSongsCard)
