@@ -129,3 +129,7 @@ export const fetchCategoriesAsync = ({ token }) => {
     }
   }
 }
+
+export const clearSearch = () => ({
+  type: searchActionTypes.CLEAR_SEARCH
+})

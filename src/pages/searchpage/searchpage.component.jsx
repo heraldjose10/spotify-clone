@@ -4,7 +4,8 @@ import { createStructuredSelector } from "reselect"
 
 import {
   fetchCategoriesAsync,
-  fetchSearchResulstsAsync
+  fetchSearchResulstsAsync,
+  clearSearch
 } from "../../redux/search/search.actions"
 import { selectCurrentUserToken } from "../../redux/user/user.selectors"
 import {
@@ -29,7 +30,8 @@ const SearchPage = ({
   playlists,
   categories,
   fetchSearchResulstsAsync,
-  fetchCategoriesAsync
+  fetchCategoriesAsync,
+  clearSearch
 }) => {
 
   useEffect(() => {
@@ -39,9 +41,10 @@ const SearchPage = ({
       fetchSearchResulstsAsync({ token, searchTerm, type: 'playlist' })
     }
     else {
+      clearSearch()
       fetchCategoriesAsync({ token })
     }
-  }, [token, searchTerm, fetchSearchResulstsAsync, fetchCategoriesAsync])
+  }, [token, searchTerm, fetchSearchResulstsAsync, fetchCategoriesAsync, clearSearch])
 
   const searchResults = <div className="search-results">
     <CardsGroup displayItems={artists} groupHeader={'Artists'} groupType={'artist'} />
@@ -88,7 +91,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   fetchCategoriesAsync: (data) => dispatch(fetchCategoriesAsync(data)),
-  fetchSearchResulstsAsync: (data) => dispatch(fetchSearchResulstsAsync(data))
+  fetchSearchResulstsAsync: (data) => dispatch(fetchSearchResulstsAsync(data)),
+  clearSearch: () => dispatch(clearSearch())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage)

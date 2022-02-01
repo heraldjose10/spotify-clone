@@ -57,7 +57,8 @@ const searchReducer = (state = INITIAL_STATE, action) => {
     case searchActionTypes.FETCH_CATEGORIES_SUCCESS: {
       return {
         ...state,
-        categories: action.payload
+        categories: action.payload,
+        isFetching: false
       }
     }
 
@@ -84,7 +85,8 @@ const searchReducer = (state = INITIAL_STATE, action) => {
         ...state,
         artists: {
           ...state.artists,
-          items: action.payload
+          items: action.payload,
+          isFetching: false
         }
       }
     }
@@ -112,7 +114,8 @@ const searchReducer = (state = INITIAL_STATE, action) => {
         ...state,
         albums: {
           ...state.albums,
-          items: action.payload
+          items: action.payload,
+          isFetching: false
         }
       }
     }
@@ -140,8 +143,15 @@ const searchReducer = (state = INITIAL_STATE, action) => {
         ...state,
         playlists: {
           ...state.playlists,
-          items: action.payload
+          items: action.payload,
+          isFetching: false
         }
+      }
+    }
+
+    case searchActionTypes.CLEAR_SEARCH: {
+      return {
+        ...INITIAL_STATE
       }
     }
 
