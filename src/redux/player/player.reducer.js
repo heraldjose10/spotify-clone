@@ -1,7 +1,11 @@
 import { playerActionTypes } from "./player.types"
 
 const INITIAL_STATE = {
-  recentTracks: [],
+  recentTracks: {
+    items: [],
+    isFetching: false,
+    error: null
+  },
   isPlaying: false,
   nowPlaying: null,
   playQueue: []
@@ -9,16 +13,43 @@ const INITIAL_STATE = {
 
 const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case playerActionTypes.SET_RECENT_TRACKS:
+
+    case playerActionTypes.FETCH_RECENT_TRACKS_ERROR:
       return {
         ...state,
-        recentTracks: action.payload
+        recentTracks: {
+          ...state.recentTracks,
+          error: action.payload
+        }
       }
+    case playerActionTypes.FETCH_RECENT_TRACKS_START:
+      return {
+        ...state,
+        recentTracks: {
+          ...state.recentTracks,
+          isFetching: true
+        }
+      }
+    case playerActionTypes.FETCH_RECENT_TRACKS_SUCCESS:
+      return {
+        ...state,
+        recentTracks: {
+          ...state.recentTracks,
+          items: action.payload
+        }
+      }
+
     case playerActionTypes.PLAY:
       return {
         ...state,
-        isPlaying: action.payload
+        isPlaying: true
       }
+    case playerActionTypes.PAUSE:
+      return {
+        ...state,
+        isPlaying: false
+      }
+
     case playerActionTypes.SET_NOW_PLAYING:
       return {
         ...state,

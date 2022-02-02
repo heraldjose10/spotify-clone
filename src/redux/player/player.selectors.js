@@ -12,7 +12,9 @@ export const selectNowPlaying = createSelector(
   player => player.nowPlaying
 )
 
-export const selectRecentTracks = createSelector(
+export const selectRecentTracksItems = createSelector(
   [selectPlayer],
-  player => player.recentTracks
+  player => player.recentTracks.items.map(item => ({
+    ...item.track
+  }))
 )

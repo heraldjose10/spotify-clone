@@ -5,11 +5,11 @@ import SpotifyWebPlayer from "react-spotify-web-playback/lib"
 
 import { selectNowPlaying, selectPlayerIsPlaying } from "../../redux/player/player.selectors"
 import { selectCurrentUserToken } from "../../redux/user/user.selectors"
-import { playTrack } from "../../redux/player/player.actions"
+import { playTrack, pauseTrack } from "../../redux/player/player.actions"
 
 import './music-player.styles.scss'
 
-function MusicPlayer({ token, nowPlaying, playStatus, playTrack }) {
+function MusicPlayer({ token, nowPlaying, playStatus, playTrack, pauseTrack }) {
 
   useEffect(() => playTrack(true), [nowPlaying, playTrack])
 
@@ -22,7 +22,9 @@ function MusicPlayer({ token, nowPlaying, playStatus, playTrack }) {
         showSaveIcon={true}
         magnifySliderOnHover={true}
         name="Spotify-Clone"
-        callback={state=>playTrack(state.isPlaying)}
+        callback={
+          state => state.isPlaying === true ? playTrack() : pauseTrack()
+        }
         styles={{
           bgColor: '#1a1f1b',
           color: '#fff',
@@ -43,7 +45,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  playTrack: (playStatus) => dispatch(playTrack(playStatus))
+  playTrack: () => dispatch(playTrack()),
+  pauseTrack: () => dispatch(pauseTrack())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayer)

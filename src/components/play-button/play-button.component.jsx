@@ -5,35 +5,14 @@ import { ReactComponent as PauseSvg } from '../../assets/pause-button.svg'
 
 import './play-button.styles.scss'
 
-class PlayButton extends React.Component {
-
-  constructor() {
-    super()
-    this.state = {
-      playing: false
+const PlayButton = ({ playing }) => (
+  <button className='play-button'>
+    {
+      playing === true
+        ? <PauseSvg className='pause-svg'></PauseSvg>
+        : <PlaySvg className='play-svg' />
     }
-  }
-
-  handleClick = () => {
-    if (this.state.playing) {
-      this.setState({ playing: false })
-    }
-    else {
-      this.setState({ playing: true })
-    }
-  }
-
-  render() {
-    return (
-      <button className='play-button' onClick={this.handleClick}>
-        {
-          this.state.playing
-            ? <PauseSvg className='pause-svg'></PauseSvg>
-            : <PlaySvg className='play-svg' />
-        }
-      </button>
-    )
-  }
-}
+  </button >
+)
 
 export default PlayButton
