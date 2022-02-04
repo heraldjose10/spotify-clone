@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { getAccessTokenFromURL } from '../../authorization/authorization.utils'
 import { fetchCurrentUserAsync } from '../../redux/user/user.actions'
-import { selectCurrentUserId, selectCurrentUserToken } from "../../redux/user/user.selectors";
+import { selectLoggedAt, selectCurrentUserToken } from "../../redux/user/user.selectors";
 
 import GreetingCard from "../../components/greeting-card/greeting-card.component";
 import RecentsCollection from "../../components/recents-collection/recents-collection.component";
@@ -14,22 +14,21 @@ import Recommendations from "../../components/recommendations/recommendations.co
 
 import './homepage.styles.scss'
 
-const HomePage = ({ currentUserId, currentUserToken, fetchCurrentUserAsync }) => {
+const HomePage = ({ loggedAt, fetchCurrentUserAsync }) => {
 
   let navigate = useNavigate()
-
   useEffect(() => {
 
-    if (window.location.hash && currentUserId == null) {
+    if (window.location.hash && loggedAt === null) {
       const token = getAccessTokenFromURL(window.location.hash)
       fetchCurrentUserAsync(token)
     }
-    else{
+    else {
       navigate('/')
     }
-  }, [fetchCurrentUserAsync, currentUserId, navigate])
+  }, [fetchCurrentUserAsync, loggedAt, navigate])
 
-  if (currentUserToken) {
+  if (loggedAt) {
     return (
       <div className='homepage'>
         <GreetingCard />
@@ -45,7 +44,7 @@ const HomePage = ({ currentUserId, currentUserToken, fetchCurrentUserAsync }) =>
 
 const mapStateToProps = createStructuredSelector({
   currentUserToken: selectCurrentUserToken,
-  currentUserId: selectCurrentUserId
+  loggedAt: selectLoggedAt
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,6 +2,11 @@ import { createSelector } from "reselect";
 
 const selectUser = state => state.user
 
+export const selectLoggedAt = createSelector(
+  [selectUser],
+  user => user.loggedAt
+)
+
 export const selectCurrentUser = createSelector(
   [selectUser],
   user => user.currentUser

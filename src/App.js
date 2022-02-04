@@ -1,6 +1,11 @@
 import { Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useEffect } from 'react';
+
+import { selectLoggedAt } from './redux/user/user.selectors';
+import { selectNowPlaying } from './redux/player/player.selectors';
+import { logoutCurrentUser } from './redux/user/user.actions';
 
 import './App.css';
 
@@ -15,21 +20,31 @@ import UserProfileDropdown from './components/user-profile-dropdown/user-profile
 import AlbumPage from './pages/album-page/album-page.componenent';
 import Collection from './components/collection/collection.component';
 
-import { selectCurrentUserToken } from './redux/user/user.selectors';
-import { selectNowPlaying } from './redux/player/player.selectors';
 
-function App({ nowPlaying, currentUserToken }) {
+function App({ nowPlaying, loggedAt, logoutCurrentUser }) {
+
+  let currentTime = new Date()
+  let loggedDate = new Date(loggedAt)
+  const logged = (Math.abs(currentTime - loggedDate) < 3600000) && loggedAt !== null
+
+  useEffect(() => {
+    if (logged === false && loggedAt !== null) {
+      logoutCurrentUser()
+    }
+  }, [logged, logoutCurrentUser, loggedAt])
+
+
   return (
     <div className='app'>
       {
-        currentUserToken ? <SideBar /> : ''
+        logged === true ? <SideBar /> : ''
       }
       {
-        currentUserToken ? <UserProfileDropdown /> : ''
+        logged === true ? <UserProfileDropdown /> : ''
       }
       <Routes>
         <Route path='/' element={
-          currentUserToken ? <HomePage /> : <LoginPrompt />
+          logged === true ? <HomePage /> : <LoginPrompt />
         } />
         <Route path='/dash' element={<HomePage />} />
         <Route path='/library' element={<Library />} />
@@ -43,7 +58,7 @@ function App({ nowPlaying, currentUserToken }) {
         </Route>
       </Routes>
       {
-        currentUserToken && nowPlaying ? <MusicPlayer /> : ''
+        (logged === true) && nowPlaying ? <MusicPlayer /> : ''
       }
     </div>
   )
@@ -51,7 +66,11 @@ function App({ nowPlaying, currentUserToken }) {
 
 const mapStateToProps = createStructuredSelector({
   nowPlaying: selectNowPlaying,
-  currentUserToken: selectCurrentUserToken
+  loggedAt: selectLoggedAt
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  logoutCurrentUser: () => dispatch(logoutCurrentUser())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

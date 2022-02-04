@@ -12,11 +12,13 @@ const INITIAL_STATE = {
     items: [],
     isFetching: false,
     error: null
-  }
+  },
+  loggedAt: null
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
     case userActionTypes.FETCH_CURRENT_USER_SUCCESS: {
       return ({
         ...state,
@@ -24,7 +26,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
           ...action.payload,
           isFetching: false,
           error: null,
-        }
+        },
+        loggedAt: new Date()
       })
     }
     case userActionTypes.FETCH_CURRENT_USER_START: {
@@ -46,16 +49,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
         }
       }
     }
+
     case userActionTypes.LOGOUT_CURRENT_USER: {
-      return ({
-        ...state,
-        currentUser: {
-          token: null,
-          displayName: null,
-          id: null
-        }
-      })
+      return {
+        ...INITIAL_STATE
+      }
     }
+
     case userActionTypes.FETCH_USER_PLAYLISTS_SUCCESS: {
       return {
         ...state,
@@ -85,6 +85,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         }
       }
     }
+    
     default:
       return state
   }
