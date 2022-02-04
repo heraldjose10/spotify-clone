@@ -7,18 +7,19 @@ import {
   selectCurrentUserDisplayName,
   selectCurrentUserToken
 } from "../../redux/user/user.selectors";
-import { fetchLikedTracksAsync } from "../../redux/collection/collection.actions";
+import { fetchLikedTracksAsync, removeCOllection } from "../../redux/collection/collection.actions";
 
 import PlayButton from '../play-button/play-button.component'
 
 import './liked-songs-card.styles.scss'
 
 
-const LikedSongsCard = ({ likedTracks, token, displayName, fetchLikedTracksAsync }) => {
+const LikedSongsCard = ({ likedTracks, token, displayName, fetchLikedTracksAsync, removeCOllection }) => {
 
   useEffect(() => {
     fetchLikedTracksAsync({ token, displayName })
-  }, [fetchLikedTracksAsync, token, displayName])
+    return () => removeCOllection()
+  }, [fetchLikedTracksAsync, token, displayName, removeCOllection])
 
   return (
     <div className='liked-songs-card'>
@@ -46,7 +47,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchLikedTracksAsync: data => dispatch(fetchLikedTracksAsync(data))
+  fetchLikedTracksAsync: data => dispatch(fetchLikedTracksAsync(data)),
+  removeCOllection: () => dispatch(removeCOllection())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LikedSongsCard)

@@ -52,7 +52,7 @@ const Track = ({ track, setNowPlaying }) => {
           : (
             <span className='artists cols'>
               {
-                track.artists.map(artist =>
+                track.artists && track.artists.map(artist =>
                   artist.name
                 )
                   .join(' + ')

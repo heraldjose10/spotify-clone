@@ -16,9 +16,9 @@ import './cards-grid.styles.scss'
 const CardsGrid = ({ token, userId, playlists, fetchUserPlaylistsStartAsync }) => {
 
   useEffect(() => {
-    fetchUserPlaylistsStartAsync({token, userId})
+    fetchUserPlaylistsStartAsync({ token, userId })
   }, [userId, token, fetchUserPlaylistsStartAsync])
-  
+
   return (
     <div className='cards-grid'>
       <Link to='/playlist/liked' className="liked">

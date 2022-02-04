@@ -1,20 +1,11 @@
 import { collectionActionTypes } from './collection.types'
 
 const INITIAL_STATE = {
-  playlist: {
-    items: [],
-    details: {},
-  },
-  album: {
-    items: [],
-    details: {}
-  },
-  likedTracks: {
-    items: [],
-    details: {}
-  },
+  items: [],
+  details: {},
   isFetching: false,
-  error: null
+  error: null,
+  next: null
 }
 
 const collectionReducer = (state = INITIAL_STATE, action) => {
@@ -22,54 +13,41 @@ const collectionReducer = (state = INITIAL_STATE, action) => {
     case collectionActionTypes.FETCH_COLLECTION_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: null
       }
 
     case collectionActionTypes.FETCH_COLLECTION_ERROR:
       return {
         ...state,
+        isFetching: false,
         error: action.payload
       }
 
-    case collectionActionTypes.REMOVE_ALBUM:
+    case collectionActionTypes.REMOVE_COLLECTION:
       return {
-        ...state,
-        album: {
-          items: [],
-          details: {}
-        }
-      }
-    case collectionActionTypes.REMOVE_PLAYLIST:
-      return {
-        ...state,
-        playlist: {
-          items: [],
-          details: {}
-        }
-      }
-    case collectionActionTypes.REMOVE_LIKED_TRACKS:
-      return {
-        ...state,
-        likedTracks: {
-          items: [],
-          details: {}
-        }
+        ...INITIAL_STATE
       }
 
-    case collectionActionTypes.FETCH_ALBUM_SUCCESS:
+    case collectionActionTypes.FETCH_COLLECTION_SUCCESS:
       return {
         ...state,
-        album: action.payload
+        details: action.payload.details,
+        items: action.payload.items,
+        isFetching: false
       }
-    case collectionActionTypes.FETCH_PLAYLIST_SUCCESS:
+
+    case collectionActionTypes.SET_NEXT:
       return {
         ...state,
-        playlist: action.payload
+        next: action.payload
       }
-    case collectionActionTypes.FETCH_LIKED_TRACKS_SUCCESS:
+
+    case collectionActionTypes.UPDATE_COLLECTION_ITEMS:
       return {
         ...state,
-        likedTracks: action.payload
+        items: [...state.items, ...action.payload],
+        isFetching: false
       }
 
     default:

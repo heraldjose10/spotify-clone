@@ -3,31 +3,13 @@ import axios from "axios";
 import { collectionActionTypes } from "./collection.types";
 import { API_ENDPOINT } from "../../endpoints";
 
-export const removeAlbum = () => ({
-  type: collectionActionTypes.REMOVE_ALBUM
+export const removeCOllection = () => ({
+  type: collectionActionTypes.REMOVE_COLLECTION
 })
 
-export const removePlaylist = () => ({
-  type: collectionActionTypes.REMOVE_PLAYLIST
-})
-
-export const removeLikedTracks = () => ({
-  type: collectionActionTypes.REMOVE_LIKED_TRACKS
-})
-
-export const fetchAlbumSuccess = album => ({
-  type: collectionActionTypes.FETCH_ALBUM_SUCCESS,
-  payload: album
-})
-
-export const fetchPlaylistSuccess = (playlist) => ({
-  type: collectionActionTypes.FETCH_PLAYLIST_SUCCESS,
-  payload: playlist
-})
-
-export const fetchLikedTracksSuccess = (likedTracks) => ({
-  type: collectionActionTypes.FETCH_LIKED_TRACKS_SUCCESS,
-  payload: likedTracks
+export const fetchCollectionSuccess = (collection) => ({
+  type: collectionActionTypes.FETCH_COLLECTION_SUCCESS,
+  payload: collection
 })
 
 export const fetchCollectionFailure = (error) => ({
@@ -37,6 +19,16 @@ export const fetchCollectionFailure = (error) => ({
 
 export const fetchCollectionStart = () => ({
   type: collectionActionTypes.FETCH_COLLECTION_START
+})
+
+export const setNext = (next) => ({
+  type: collectionActionTypes.SET_NEXT,
+  payload: next
+})
+
+export const updateCollectionItems = (items) => ({
+  type: collectionActionTypes.UPDATE_COLLECTION_ITEMS,
+  payload: items
 })
 
 export const fetchCollectionAsync = ({ token, collectionType, id }) => {
@@ -49,9 +41,11 @@ export const fetchCollectionAsync = ({ token, collectionType, id }) => {
         url: `${API_ENDPOINT}${collectionType}s/${id}`
       })
       const collection = response.data
+
       if (collectionType === 'album') {
+        console.log(collection);
         dispatch(
-          fetchAlbumSuccess({
+          fetchCollectionSuccess({
             items: collection.tracks.items,
             details: {
               albumArtURL: collection.images.length > 0 ? collection.images[0].url : null,
@@ -66,7 +60,7 @@ export const fetchCollectionAsync = ({ token, collectionType, id }) => {
       }
       else if (collectionType === 'playlist') {
         dispatch(
-          fetchPlaylistSuccess({
+          fetchCollectionSuccess({
             items: collection.tracks.items,
             details: {
               id: collection.id,
@@ -81,6 +75,7 @@ export const fetchCollectionAsync = ({ token, collectionType, id }) => {
           })
         )
       }
+      collection.tracks.next ? dispatch(setNext(collection.tracks.next)) : dispatch(setNext(null))
     } catch (error) {
       dispatch(fetchCollectionFailure(error))
     }
@@ -99,7 +94,7 @@ export const fetchLikedTracksAsync = ({ token, displayName }) => {
         url: `${API_ENDPOINT}me/tracks/`
       })
       dispatch(
-        fetchLikedTracksSuccess({
+        fetchCollectionSuccess({
           items: response.data.items,
           details: {
             name: 'Liked Songs',
@@ -111,6 +106,24 @@ export const fetchLikedTracksAsync = ({ token, displayName }) => {
           }
         })
       )
+      response.data.next ? dispatch(setNext(response.data.next)) : dispatch(setNext(null))
+    } catch (error) {
+      dispatch(fetchCollectionFailure(error))
+    }
+  }
+}
+
+export const updateCollectionItemsAsync = ({ token, next }) => {
+  return async dispatch => {
+    dispatch(fetchCollectionStart())
+    try {
+      let response = await axios({
+        method: 'GET',
+        url: next,
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      dispatch(updateCollectionItems(response.data.items))
+      response.data.next ? dispatch(setNext(response.data.next)) : dispatch(setNext(null))
     } catch (error) {
       dispatch(fetchCollectionFailure(error))
     }
