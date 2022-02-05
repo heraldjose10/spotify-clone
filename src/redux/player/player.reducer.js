@@ -8,7 +8,9 @@ const INITIAL_STATE = {
   },
   isPlaying: false,
   nowPlaying: null,
-  playQueue: []
+  playQueue: [],
+  isFetching: false,
+  error: null
 }
 
 const playerReducer = (state = INITIAL_STATE, action) => {
@@ -55,6 +57,12 @@ const playerReducer = (state = INITIAL_STATE, action) => {
         ...state,
         nowPlaying: action.payload
       }
+      
+    case playerActionTypes.CLEAR_PLAYER:
+      return {
+        ...INITIAL_STATE
+      }
+
     default:
       return state
   }

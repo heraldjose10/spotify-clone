@@ -44,3 +44,7 @@ export const setNowPlaying = track => ({
 export const pauseTrack = () => ({
   type: playerActionTypes.PAUSE
 })
+
+export const clearPlayer = () => ({
+  type: playerActionTypes.CLEAR_PLAYER
+})

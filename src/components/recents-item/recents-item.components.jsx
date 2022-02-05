@@ -20,11 +20,11 @@ const RecentsItem = ({ track, setNowPlaying, nowPlaying, pauseTrack, isPlaying }
       <h3 className='track-name'>{track.name.length < 20 ? track.name : `${track.name.substring(0, 30)}...`}</h3>
       <div
         onClick={
-          () => (track.uri === nowPlaying.uri) && (isPlaying === true) ? pauseTrack() : setNowPlaying(track)
+          () => (track.uri === nowPlaying?.uri) && (isPlaying === true) ? pauseTrack() : setNowPlaying(track)
         }
       >
         <PlayButton
-          playing={(track.uri === nowPlaying.uri) && (isPlaying === true) ? true : false}
+          playing={(track.uri === nowPlaying?.uri) && (isPlaying === true) ? true : false}
         />
       </div>
     </div>

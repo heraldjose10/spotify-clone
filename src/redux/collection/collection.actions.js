@@ -43,7 +43,6 @@ export const fetchCollectionAsync = ({ token, collectionType, id }) => {
       const collection = response.data
 
       if (collectionType === 'album') {
-        console.log(collection);
         dispatch(
           fetchCollectionSuccess({
             items: collection.tracks.items,

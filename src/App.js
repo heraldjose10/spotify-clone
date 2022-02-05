@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useEffect } from 'react';
 
-import { selectLoggedAt } from './redux/user/user.selectors';
-import { selectNowPlaying } from './redux/player/player.selectors';
+import { selectLoggedAt, selectCurrentUserToken } from './redux/user/user.selectors';
 import { logoutCurrentUser } from './redux/user/user.actions';
 
 import './App.css';
@@ -21,7 +20,7 @@ import AlbumPage from './pages/album-page/album-page.componenent';
 import Collection from './components/collection/collection.component';
 
 
-function App({ nowPlaying, loggedAt, logoutCurrentUser }) {
+function App({ loggedAt, logoutCurrentUser, token }) {
 
   let currentTime = new Date()
   let loggedDate = new Date(loggedAt)
@@ -58,19 +57,19 @@ function App({ nowPlaying, loggedAt, logoutCurrentUser }) {
         </Route>
       </Routes>
       {
-        (logged === true) && nowPlaying ? <MusicPlayer /> : ''
+        (logged === true) ? <MusicPlayer /> : ''
       }
     </div>
   )
 }
 
 const mapStateToProps = createStructuredSelector({
-  nowPlaying: selectNowPlaying,
-  loggedAt: selectLoggedAt
+  loggedAt: selectLoggedAt,
+  token: selectCurrentUserToken
 })
 
 const mapDispatchToProps = dispatch => ({
-  logoutCurrentUser: () => dispatch(logoutCurrentUser())
+  logoutCurrentUser: () => dispatch(logoutCurrentUser()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -11,20 +11,33 @@ import './music-player.styles.scss'
 
 function MusicPlayer({ token, nowPlaying, playStatus, playTrack, pauseTrack }) {
 
-  useEffect(() => playTrack(true), [nowPlaying, playTrack])
-
+  useEffect(() => {
+    if (nowPlaying?.uri) {
+      playTrack()
+    }
+  }, [nowPlaying, playTrack])
   return (
     <div className="player">
       <SpotifyWebPlayer
         token={token}
-        uris={[nowPlaying.uri]}
+        uris={nowPlaying ? [nowPlaying.uri] : null}
         play={playStatus}
         showSaveIcon={true}
         magnifySliderOnHover={true}
         name="Spotify-Clone"
         callback={
-          state => state.isPlaying === true ? playTrack() : pauseTrack()
+          state => {
+            if (state.isPlaying === true && playStatus === false) {
+              playTrack()
+            }
+            else if (playStatus === true && state.isPlaying === false) {
+              pauseTrack()
+            }
+          }
         }
+        syncExternalDeviceInterval={1}
+        persistDeviceSelection={true}
+        syncExternalDevice={true}
         styles={{
           bgColor: '#1a1f1b',
           color: '#fff',
@@ -41,7 +54,7 @@ function MusicPlayer({ token, nowPlaying, playStatus, playTrack, pauseTrack }) {
 const mapStateToProps = createStructuredSelector({
   playStatus: selectPlayerIsPlaying,
   token: selectCurrentUserToken,
-  nowPlaying: selectNowPlaying
+  nowPlaying: selectNowPlaying,
 })
 
 const mapDispatchToProps = dispatch => ({

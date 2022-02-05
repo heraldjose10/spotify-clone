@@ -12,7 +12,7 @@ import collectionReducer from "./collection/collection.reducer";
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'player'],
+  whitelist: ['user'],
 }
 
 const rootReducer = combineReducers({

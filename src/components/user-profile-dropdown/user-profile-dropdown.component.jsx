@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { selectCurrentUserDisplayName } from "../../redux/user/user.selectors";
 import { logoutCurrentUser } from "../../redux/user/user.actions";
+import { clearPlayer } from "../../redux/player/player.actions";
 
 import './user-profile-dropdown.styles.scss'
-import { useNavigate } from "react-router-dom";
 
-const UserProfileDropdown = ({ displayName, logoutCurrentUser }) => {
+const UserProfileDropdown = ({ displayName, logoutCurrentUser, clearPlayer }) => {
 
   const [dropped, setDropped] = useState(false)
 
@@ -16,6 +17,7 @@ const UserProfileDropdown = ({ displayName, logoutCurrentUser }) => {
 
   const handleLogout = () => {
     logoutCurrentUser();
+    clearPlayer()
     navigate('/')
   }
 
@@ -44,7 +46,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logoutCurrentUser: () => dispatch(logoutCurrentUser())
+  logoutCurrentUser: () => dispatch(logoutCurrentUser()),
+  clearPlayer: () => dispatch(clearPlayer())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfileDropdown)
