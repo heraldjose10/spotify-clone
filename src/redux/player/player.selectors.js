@@ -18,3 +18,8 @@ export const selectRecentTracksItems = createSelector(
     ...item.track
   }))
 )
+
+export const selectPlayQueue = createSelector(
+  [selectPlayer],
+  player => player.playQueue
+)

@@ -36,6 +36,25 @@ export const selectLikedTracks = createSelector(
   })
 )
 
+export const selectCollectionItems = createSelector(
+  [selectCollection],
+  collection => {
+    if (collection.details.type === 'album') {
+      return collection.items
+    }
+    else {
+      return (
+        collection.items.map(
+          item => ({
+            ...item.track,
+            added_at: item.added_at
+          })
+        )
+      )
+    }
+  }
+)
+
 export const selectIsFetching = createSelector(
   [selectCollection],
   collection => collection.isFetching

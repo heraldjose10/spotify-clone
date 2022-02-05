@@ -48,3 +48,8 @@ export const pauseTrack = () => ({
 export const clearPlayer = () => ({
   type: playerActionTypes.CLEAR_PLAYER
 })
+
+export const setPlayQueue = track => ({
+  type: playerActionTypes.SET_PLAY_QUEUE,
+  payload: track
+})

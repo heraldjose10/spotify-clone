@@ -2,12 +2,14 @@ import { connect } from 'react-redux'
 import Moment from 'react-moment';
 import moment from 'moment'
 import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
-import { setNowPlaying } from '../../redux/player/player.actions'
+import { setNowPlaying, setPlayQueue } from '../../redux/player/player.actions'
 
 import './track.styles.scss'
+import { selectCollectionItems } from '../../redux/collection/collection.selectors';
 
-const Track = ({ track, setNowPlaying }) => {
+const Track = ({ track, setNowPlaying, setPlayQueue, collectionItems }) => {
 
   const convertToRuntime = (timeInMilliseconds) => {
     const duration = moment.duration(timeInMilliseconds)
@@ -20,12 +22,18 @@ const Track = ({ track, setNowPlaying }) => {
     e.stopPropagation()
   }
 
+  const handleClick = () => {
+    setNowPlaying(track)
+    let indexOfTrack = collectionItems
+      .map(item => item.uri)
+      .indexOf(track.uri)
+    setPlayQueue(collectionItems.slice(indexOfTrack + 1));
+  }
+
   return (
     <div
       className='track'
-      onClick={() => {
-        setNowPlaying(track)
-      }}
+      onClick={handleClick}
     >
       <div className='name cols'>
         {
@@ -74,8 +82,13 @@ const Track = ({ track, setNowPlaying }) => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  setNowPlaying: track => dispatch(setNowPlaying(track))
+const mapStateToProps = createStructuredSelector({
+  collectionItems: selectCollectionItems
 })
 
-export default connect(null, mapDispatchToProps)(Track);
+const mapDispatchToProps = dispatch => ({
+  setNowPlaying: track => dispatch(setNowPlaying(track)),
+  setPlayQueue: track => dispatch(setPlayQueue(track))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Track);

@@ -3,24 +3,31 @@ import { connect } from "react-redux"
 import { createStructuredSelector } from "reselect"
 import SpotifyWebPlayer from "react-spotify-web-playback/lib"
 
-import { selectNowPlaying, selectPlayerIsPlaying } from "../../redux/player/player.selectors"
+import { selectNowPlaying, selectPlayerIsPlaying, selectPlayQueue } from "../../redux/player/player.selectors"
 import { selectCurrentUserToken } from "../../redux/user/user.selectors"
 import { playTrack, pauseTrack } from "../../redux/player/player.actions"
 
 import './music-player.styles.scss'
 
-function MusicPlayer({ token, nowPlaying, playStatus, playTrack, pauseTrack }) {
+function MusicPlayer({ token, nowPlaying, playStatus, playTrack, pauseTrack, playQueue }) {
 
   useEffect(() => {
     if (nowPlaying?.uri) {
       playTrack()
     }
   }, [nowPlaying, playTrack])
+
+  const uri = nowPlaying
+    ? [nowPlaying.uri, ...playQueue.map(track => track.uri)]
+    : null
+
+  console.log(uri);
+
   return (
     <div className="player">
       <SpotifyWebPlayer
         token={token}
-        uris={nowPlaying ? [nowPlaying.uri] : null}
+        uris={uri}
         play={playStatus}
         showSaveIcon={true}
         magnifySliderOnHover={true}
@@ -55,6 +62,7 @@ const mapStateToProps = createStructuredSelector({
   playStatus: selectPlayerIsPlaying,
   token: selectCurrentUserToken,
   nowPlaying: selectNowPlaying,
+  playQueue: selectPlayQueue
 })
 
 const mapDispatchToProps = dispatch => ({
