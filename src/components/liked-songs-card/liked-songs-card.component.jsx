@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -18,8 +18,11 @@ const LikedSongsCard = ({ likedTracks, token, displayName, fetchLikedTracksAsync
 
   useEffect(() => {
     fetchLikedTracksAsync({ token, displayName })
+  }, [fetchLikedTracksAsync, token, displayName])
+
+  useLayoutEffect(() => {
     return () => removeCOllection()
-  }, [fetchLikedTracksAsync, token, displayName, removeCOllection])
+  }, [removeCOllection])
 
   return (
     <div className='liked-songs-card'>
