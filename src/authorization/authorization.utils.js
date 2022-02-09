@@ -1,5 +1,4 @@
 import { AUTH_ENDPOINT } from '../endpoints'
-import CLIENT_ID from '../env/client'
 
 export const handleLogin = () => {
   const URL = AUTH_ENDPOINT + 'authorize'
@@ -17,7 +16,7 @@ export const handleLogin = () => {
     'user-library-modify'
   ]
 
-  const REDIRECT = `${URL}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&scope=${SCOPES.join('+')}&redirect_uri=${REDIRECT_URI}`
+  const REDIRECT = `${URL}?response_type=${RESPONSE_TYPE}&client_id=${process.env.REACT_APP_CLIENT_IS}&scope=${SCOPES.join('+')}&redirect_uri=${REDIRECT_URI}`
   window.location = REDIRECT
 }
 
