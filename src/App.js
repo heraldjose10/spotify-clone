@@ -33,6 +33,7 @@ function App({ loggedAt, logoutCurrentUser, token }) {
   }, [logged, logoutCurrentUser, loggedAt])
 
 
+  console.log(process.env);
   return (
     <div className='app'>
       {
