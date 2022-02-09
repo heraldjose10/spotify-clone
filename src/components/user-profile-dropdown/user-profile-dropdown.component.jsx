@@ -21,9 +21,13 @@ const UserProfileDropdown = ({ displayName, logoutCurrentUser, clearPlayer }) =>
     navigate('/')
   }
 
+  const handleProfileButtonClick = () => {
+    setDropped(!dropped)
+  }
+
   return (
     <div className="profile-dropdown" >
-      <div className="profile-button" onClick={() => setDropped(!dropped)}>
+      <div className="profile-button" onClick={handleProfileButtonClick}>
         <i className="bi bi-person-circle"></i>
         <p>{displayName}</p>
         {

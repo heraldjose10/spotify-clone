@@ -1,6 +1,7 @@
-// $primary-color: rgb(66, 92, 42);
-// $primary-text-color: rgb(210, 226, 200);
-$badge-heigt: 90px;
+$phone: 480px;
+$tablet: 768px;
+
+$badge-height: 90px;
 $primary-color: rgb(44, 54, 50);
 $primary-text-color: white;
 
@@ -13,7 +14,7 @@ $primary-text-color: white;
   align-items: center;
   justify-content: space-between;
   background-color: $primary-color;
-  height: $badge-heigt;
+  height: $badge-height;
   min-width: 350px;
   flex: 1;
   padding-right: 20px;
@@ -21,12 +22,12 @@ $primary-text-color: white;
   border-radius: 20px;
 
   &:hover .play-button {
-    @include showButton()
+    @include showButton();
   }
 
   .badge {
-    height: $badge-heigt;
-    width: $badge-heigt;
+    height: $badge-height;
+    width: $badge-height;
     border-radius: 20px 0 0 20px;
   }
 
@@ -35,5 +36,50 @@ $primary-text-color: white;
     flex: auto;
     margin: 0 10px;
     color: $primary-text-color;
+  }
+
+  @media screen and (max-width: $tablet) and (min-width: $phone) {
+    height: 60px;
+    width: 300px;
+    min-width: 300px;
+    flex-grow: 0;
+    padding-right: 0;
+
+    .badge {
+      height: 60px;
+      width: 60px;
+    }
+
+    .track-name {
+      font-size: 12px;
+    }
+
+    .play-container {
+      margin-right: 10px;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    height: 60px;
+    min-width: 250px;
+    flex-grow: 1;
+    padding-right: 0;
+
+    .badge {
+      height: 60px;
+      width: 60px;
+    }
+
+    .track-name {
+      font-size: 12px;
+    }
+
+    .play-container {
+      margin-right: 10px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    max-width: 80vw;
   }
 }

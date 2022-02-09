@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .side-bar {
   background-color: rgb(44, 54, 50);
   height: 100vh;
@@ -16,5 +19,28 @@
     width: 90%;
     height: 0.5px;
     margin: 0;
+  }
+
+  @media screen and (max-width: $tablet) {
+
+    max-width: 80px;
+    width: 80px;
+    min-width: 0px;
+    justify-content: center;
+
+    hr{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+
+    width: 50px;
+    min-width: 50px;
+    justify-content: center;
+
+    hr{
+      display: none;
+    }
   }
 }

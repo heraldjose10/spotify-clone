@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .card {
   flex: 1 1 auto;
   height: 360px;
@@ -38,5 +41,40 @@
     position: absolute;
     top: 220px;
     right: 40px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 200px;
+    height: 260px;
+
+    .card-image {
+      height: 200px;
+      width: 200px;
+    }
+
+    h4 {
+      font-size: 14px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    width: 150px;
+    height: 205px;
+    padding: 10px;
+
+    .card-image {
+      height: 150px;
+      width: 150px;
+    }
+
+    h4 {
+      margin: 5px 0 0px 0;
+    }
+    p {
+      margin: 0px 0 5px 0;
+    }
   }
 }

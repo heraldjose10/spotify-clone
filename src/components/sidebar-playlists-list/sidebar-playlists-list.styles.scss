@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .list{
   overflow-x: hidden;
   overflow-y: scroll;
@@ -19,5 +22,10 @@
       color: white;
     }
   }
+}
 
+@media screen and (max-width: $tablet) {
+  .list {
+    display: none;
+  }
 }

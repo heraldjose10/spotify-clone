@@ -1,3 +1,5 @@
+$phone: 480px;
+$tablet: 768px;
 $large-screen: 1920px;
 
 .recents-collection {
@@ -9,5 +11,17 @@ $large-screen: 1920px;
 
   @media screen and(min-width:$large-screen) {
     max-width: 1890px;
+  }
+
+  @media screen and (max-width: $tablet) and (min-width: $phone) {
+    gap: 20px;
+    height: 220px;
+  }
+
+  @media screen and (max-width: $phone){
+    gap: 15px;
+    height: 220px;
+    height: 210px;
+    margin-right: 20px;
   }
 }

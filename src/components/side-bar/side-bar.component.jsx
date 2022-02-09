@@ -10,7 +10,7 @@ const SideBar = () => (
   <div className='side-bar'>
     <SideBarNav />
     <SideBarBtnsGroup />
-    <hr />
+    <hr className='hr-line'/>
     <SideBarPlaylistsList />
   </div>
 )

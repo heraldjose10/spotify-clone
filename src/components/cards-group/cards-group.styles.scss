@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .group {
   margin: 30px 0 20px 0;
   color: white;
@@ -18,12 +21,52 @@
     // justify-content: space-between;
     max-height: 400px;
 
-    .card-item{
+    .card-item {
       text-decoration: none;
       color: white;
 
-      :hover{
+      :hover {
         background-color: #5e736b;
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    margin: 10px 0;
+
+    .group-heading {
+      font-size: 30px;
+    }
+
+    .cards-container {
+      grid-auto-flow: column;
+      overflow-x: auto;
+      width: calc(100vw - 100px);
+      grid-auto-columns: minmax(280px, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      column-gap: 0px;
+      scrollbar-width: none;
+
+      .card-item {
+        width: 240px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    margin: 10px 0;
+
+    .group-heading {
+      font-size: 24px;
+    }
+
+    .cards-container{
+      width: calc(100vw - 70px);
+      grid-auto-columns: minmax(200px, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  
+      .card-item {
+        width: 170px;
       }
     }
   }

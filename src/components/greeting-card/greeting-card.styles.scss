@@ -1,5 +1,17 @@
+$phone: 480px;
+$tablet: 768px;
+
 h1 {
   font-size: 400%;
   margin: 20px 0;
   color: white;
+  
+  @media screen and (max-width: $tablet) {
+    font-size: 300%;
+  }
+
+  @media screen and (max-width: $phone) {
+    font-size: 200%;
+  }
+
 }

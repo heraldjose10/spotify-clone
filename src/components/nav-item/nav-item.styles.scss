@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -18,5 +21,19 @@
   h3 {
     margin: 0;
     font-size: 14px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    
+    justify-content: center;
+    margin: 20px 0;
+
+    h3 {
+      display: none;
+    }
+    
+    i{
+      margin-right: 0px;
+    }
   }
 }
