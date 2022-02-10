@@ -1,7 +1,8 @@
+$phone: 480px;
+$tablet: 768px;
+
 .liked-songs-card {
-  // width: 520px;
-  // max-width: 590px;
-  grid-column: span 2/auto;
+  grid-column: span 2 / auto;
   background-color: blue;
   flex: 1 1 auto;
   padding: 20px 20px;
@@ -28,11 +29,29 @@
 
   .button-container {
     position: absolute;
-    top: 400px-70px;
+    top: calc(400px - 50px);
     right: 30px;
   }
 
   &:hover .play-button {
     opacity: 100;
+  }
+
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    h4 {
+      margin-top: 30px;
+    }
+  }
+
+  @media (hover: none) {
+    .play-button {
+      opacity: 100;
+    }
   }
 }

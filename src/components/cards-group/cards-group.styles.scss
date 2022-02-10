@@ -46,10 +46,14 @@ $tablet: 768px;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       column-gap: 0px;
       scrollbar-width: none;
+      -ms-overflow-style: none; 
 
       .card-item {
         width: 240px;
       }
+    }
+    .cards-container::-webkit-scrollbar{
+      display: none;
     }
   }
 

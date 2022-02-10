@@ -52,14 +52,30 @@ $tablet: 768px;
       width: 200px;
     }
 
+    .play-button {
+      opacity: 100;
+    }
+
     h4 {
       font-size: 14px;
     }
+
     p {
       font-size: 12px;
     }
+
+    .button-container {
+      top: 180px;
+      right: 30px;
+    }
   }
 
+  @media screen and (max-width: 600px) {
+    .button-container {
+      top: 140px;
+      right: 20px;
+    }
+  }
   @media screen and (max-width: $phone) {
     width: 150px;
     height: 205px;
@@ -75,6 +91,11 @@ $tablet: 768px;
     }
     p {
       margin: 0px 0 5px 0;
+    }
+
+    .button-container {
+      top: 165px;
+      right: 10px;
     }
   }
 }

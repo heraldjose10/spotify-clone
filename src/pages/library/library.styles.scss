@@ -1,4 +1,15 @@
+$phone: 480px;
+$tablet: 768px;
+
 .library {
   margin: 30px 50px;
   flex: 1 1 auto;
+
+  @media screen and (max-width: $tablet) {
+    margin: 30px 20px 100px 20px;
+  }
+
+  @media screen and (max-width: $phone) {
+    margin: 30px 10px 100px 10px;
+  }
 }

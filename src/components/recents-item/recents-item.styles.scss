@@ -45,6 +45,10 @@ $primary-text-color: white;
     flex-grow: 0;
     padding-right: 0;
 
+    .play-button {
+      opacity: 100;
+    }
+
     .badge {
       height: 60px;
       width: 60px;
@@ -64,6 +68,10 @@ $primary-text-color: white;
     min-width: 250px;
     flex-grow: 1;
     padding-right: 0;
+
+    .play-button {
+      opacity: 100;
+    }
 
     .badge {
       height: 60px;

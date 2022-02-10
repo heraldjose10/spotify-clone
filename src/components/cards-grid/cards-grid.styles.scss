@@ -1,8 +1,8 @@
+$phone: 480px;
+$tablet: 768px;
+
 .cards-grid {
   margin-bottom: 50px;
-  .liked {
-    grid-column: span 2 / auto;
-  }
   // width: 1000px;
   display: grid;
   // flex-wrap: wrap;
@@ -10,8 +10,58 @@
   gap: 30px;
   color: white;
 
+  .liked {
+    grid-column: span 2 / auto;
+  }
+
   a {
     text-decoration: none;
     color: white;
+  }
+
+  @media screen and (max-width: $tablet) {
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 240px));
+
+    .cards-grid {
+      h4 {
+        font-size: 18px;
+        margin-top: 5px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 180px));
+
+    .card {
+      width: 160px;
+      padding: 20px 10px;
+      height: 220px;
+
+      img {
+        height: 160px;
+        width: 160px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 140px));
+
+    .card {
+      width: 130px;
+      padding: 10px 5px 40px 5px;
+      height: 160px;
+
+      img {
+        height: 130px;
+        width: 130px;
+      }
+    }
   }
 }
