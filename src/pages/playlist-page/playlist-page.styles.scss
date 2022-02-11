@@ -1,3 +1,11 @@
+$phone: 480px;
+$tablet: 768px;
+
 .playlist-page {
   flex: 1 1 auto;
+
+  @media screen and (max-width: $tablet) {
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
 }

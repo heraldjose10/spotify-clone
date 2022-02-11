@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .banner {
   display: flex;
   background: linear-gradient(90deg, rgb(32, 26, 141) 0%, rgba(9, 9, 121, 1) 35%, rgb(130, 169, 219) 100%);
@@ -26,17 +29,85 @@
     h1 {
       margin: 0;
       font-size: 92px;
-      max-height: 250px;
+      max-height: 230px;
       overflow: hidden;
     }
 
-    .description{
+    .description {
       margin-bottom: 5px;
     }
 
     p {
       margin: 0;
       font-weight: bold;
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+    padding: 10px 40px;
+    height: 240px;
+
+    .playlist-image {
+      height: 200px;
+      width: 200px;
+    }
+
+    .playlist-info {
+      h1 {
+        font-size: 5vw;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .description {
+        font-size: 12px;
+        max-height: 30px;
+        overflow-y: hidden;
+      }
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .playlist-image {
+      height: 160px;
+      width: 160px;
+    }
+    .playlist-info {
+      h1 {
+        font-size: 4.5vw;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      .description {
+        font-size: 10px;
+        max-height: 24px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 70px);
+    height: auto;
+
+    .playlist-image {
+      margin: 20px 0px;
+    }
+
+    .playlist-info {
+      h1 {
+        font-size: 6vw;
+      }
+      p {
+        font-size: 10px;
+      }
     }
   }
 }

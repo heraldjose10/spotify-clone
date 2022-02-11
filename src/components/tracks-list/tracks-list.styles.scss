@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .tracks-list {
   padding: 0 40px;
   margin: 30px 0 60px 0;
@@ -21,6 +24,28 @@
     .heading {
       padding: 0 10px;
       text-transform: uppercase;
+    }
+  }
+
+  @media screen and (max-width: $tablet) {
+
+    .list-header {
+      .duration,
+      .date {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    padding: 0 10px;
+  }
+
+  .list-header{
+    margin-bottom: 10px;
+
+    span{
+      font-size: 14px;
     }
   }
 }

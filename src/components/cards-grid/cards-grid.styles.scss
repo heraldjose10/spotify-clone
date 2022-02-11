@@ -52,6 +52,7 @@ $tablet: 768px;
 
   @media screen and (max-width: $phone) {
     grid-template-columns: repeat(auto-fill, minmax(140px, 140px));
+    gap: 10px;
 
     .card {
       width: 130px;
