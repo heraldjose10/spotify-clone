@@ -1,3 +1,6 @@
+$phone: 480px;
+$tablet: 768px;
+
 .search {
   position: relative;
 
@@ -21,5 +24,30 @@
     left: 8px;
     font-size: 24px;
   }
-}
 
+  @media screen and (max-width: $tablet) {
+    width: 30vw;
+
+    .search-box{
+      width: 25vw;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 60vw;
+    top: 60px;
+
+    .search-box{
+      width: 40vw;
+    }
+  }
+
+  @media screen and (max-width: $phone) {
+    width: 60vw;
+    top: 0px;
+
+    .search-box{
+      font-size: 18px;
+    }
+  }
+}
